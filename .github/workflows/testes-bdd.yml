@@ -1,0 +1,73 @@
+# Cenários BDD da API EcoTrack.
+#
+# Sobe o Oracle e a API (imagem publicada no GHCR) com o docker compose do
+# repositório, roda os cenários com o Maven do runner e publica o relatório
+# do Cucumber como artefato. A tabela de resultados aparece no resumo do run.
+name: Testes BDD
+
+on:
+  push:
+    branches: [main]
+    paths-ignore: ["**.md", "docs/**", "evidencias/**"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tags:
+        description: "Filtro de tags do Cucumber (ex: @negativo). Vazio roda tudo."
+        required: false
+        default: ""
+
+permissions:
+  contents: read
+
+jobs:
+  bdd:
+    name: Cenários BDD e contratos
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Configurar JDK 21
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+          cache-dependency-path: testes/pom.xml
+
+      - name: Subir Oracle e API
+        run: |
+          docker compose up -d --wait oracle api
+          docker compose ps
+          curl -s http://localhost:8080/actuator/info
+
+      - name: Rodar os cenários
+        working-directory: testes
+        env:
+          ECOTRACK_BASE_URL: http://localhost:8080
+          TAGS: ${{ inputs.tags }}
+        run: mvn -B -ntp test ${TAGS:+"-Dcucumber.filter.tags=$TAGS"}
+
+      - name: Resumo dos cenários
+        if: always()
+        run: bash scripts/ci/resumo-cucumber.sh testes/target/cucumber/cucumber.json >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Publicar relatório do Cucumber
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: relatorio-cucumber
+          path: |
+            testes/target/cucumber/
+            testes/target/surefire-reports/
+          retention-days: 14
+
+      - name: Logs da API
+        if: failure()
+        run: docker compose logs --tail 200 api
+
+      - name: Derrubar o ambiente
+        if: always()
+        run: docker compose down -v
