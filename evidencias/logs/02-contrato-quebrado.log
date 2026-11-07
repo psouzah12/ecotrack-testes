@@ -1,0 +1,337 @@
+$ # cópia do empresa.json sem o campo dataCadastro (alterada só em target/test-classes)
+$ mvn -B surefire:test -Dcucumber.filter.tags="@empresas and @positivo"
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< br.com.fiap:ecotrack-testes >---------------------
+[INFO] Building EcoTrack - testes BDD da API 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-cli) @ ecotrack-testes ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running br.com.fiap.ecotrack.bdd.ExecutarCenariosTest
+
+@empresas @positivo
+Cenário: Cadastrar uma empresa                       # classpath:features/empresas.feature:12
+  ✔ Dado que estou autenticado como ADMIN            # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu cadastro a empresa:                    # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroAEmpresa(java.util.Map)
+      | nome   | Reciclar Embalagens LTDA |
+      | setor  | Reciclagem               |
+      | cidade | Santos                   |
+      | estado | sp                       |
+  ✔ Então a resposta tem status 201                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✘ E o corpo segue o contrato "empresa"             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+        java.lang.AssertionError: [violações do contrato empresa.json] 
+        Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+        	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+        	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:19)
+  ↷ E o campo "nome" vale "Reciclar Embalagens LTDA" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ↷ E o campo "estado" vale "SP"                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ↷ E a empresa aparece na listagem de empresas      # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaApareceNaListagem()
+
+        POST http://localhost:8080/api/empresas
+        {"nome":"Reciclar Embalagens LTDA","cnpj":"98.382.521/9082-28","setor":"Reciclagem","cidade":"Santos","estado":"sp"}
+        => HTTP/1.1 201  (93 ms)
+        {
+            "id": 58,
+            "nome": "Reciclar Embalagens LTDA",
+            "cnpj": "98.382.521/9082-28",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Consultar uma empresa pelo id            # classpath:features/empresas.feature:25
+  ✔ Dado que estou autenticado como ADMIN         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada        # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto a empresa                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.euConsultoAEmpresa()
+  ✔ Então a resposta tem status 200               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✘ E o corpo segue o contrato "empresa"          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+        java.lang.AssertionError: [violações do contrato empresa.json] 
+        Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+        	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+        	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:29)
+  ↷ E o corpo traz os dados da empresa cadastrada # br.com.fiap.ecotrack.bdd.EmpresaSteps.oCorpoTrazOsDadosDaEmpresaCadastrada()
+
+        POST http://localhost:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.305.182/4738-28","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (82 ms)
+        {
+            "id": 59,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.305.182/4738-28",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://localhost:8080/api/empresas/59
+        => HTTP/1.1 200  (80 ms)
+        {
+            "id": 59,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.305.182/4738-28",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Listar as empresas                     # classpath:features/empresas.feature:33
+  ✔ Dado que estou autenticado como ADMIN       # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada      # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto "/api/empresas"          # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200             # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✘ E o corpo segue o contrato "lista-empresas" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+        java.lang.AssertionError: [violações do contrato lista-empresas.json] 
+        Expecting empty but was: ["$[0]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+            "$[1]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+            "$[2]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+            "$[3]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+        	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+        	at ✽.o corpo segue o contrato "lista-empresas"(classpath:features/empresas.feature:37)
+  ↷ E a empresa cadastrada está na lista        # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaCadastradaEstaNaLista()
+
+        POST http://localhost:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.590.661/9594-79","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (86 ms)
+        {
+            "id": 60,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.590.661/9594-79",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://localhost:8080/api/empresas
+        => HTTP/1.1 200  (80 ms)
+        [
+            {
+                "id": 60,
+                "nome": "Verde Vale Reciclagem",
+                "cnpj": "98.590.661/9594-79",
+                "setor": "Reciclagem",
+                "cidade": "Santos",
+                "estado": "SP",
+                "dataCadastro": "2026-11-06"
+            },
+            {
+                "id": 1,
+                "nome": "Verde Bebidas LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "setor": "Bebidas",
+                "cidade": "Sao Paulo",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 2,
+                "nome": "Solar Tech S.A.",
+                "cnpj": "23.456.789/0001-12",
+                "setor": "Energia",
+                "cidade": "Campinas",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 3,
+                "nome": "Empresa Teste Delete",
+                "cnpj": "11.222.333/0001-44",
+                "setor": "Servicos",
+                "cidade": "Rio de Janeiro",
+                "estado": "RJ",
+                "dataCadastro": "2026-11-07"
+            }
+        ]
+        
+
+
+@empresas @positivo
+Cenário: Mudar o setor e a cidade de uma empresa                                  # classpath:features/empresas.feature:41
+  ✔ Dado que estou autenticado como ADMIN                                         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada                                        # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu altero a empresa para o setor "Energia solar" e a cidade "Campinas" # br.com.fiap.ecotrack.bdd.EmpresaSteps.euAlteroAEmpresa(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 200                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✘ E o corpo segue o contrato "empresa"                                          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+        java.lang.AssertionError: [violações do contrato empresa.json] 
+        Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+        	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+        	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:45)
+  ↷ E o campo "setor" vale "Energia solar"                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ↷ E o campo "cidade" vale "Campinas"                                            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://localhost:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.185.726/3246-04","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (81 ms)
+        {
+            "id": 61,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.185.726/3246-04",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        PUT http://localhost:8080/api/empresas/61
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.185.726/3246-04","setor":"Energia solar","cidade":"Campinas","estado":"SP"}
+        => HTTP/1.1 200  (82 ms)
+        {
+            "id": 61,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.185.726/3246-04",
+            "setor": "Energia solar",
+            "cidade": "Campinas",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Excluir uma empresa sem registros ligados a ela # classpath:features/empresas.feature:50
+  ✔ Dado que estou autenticado como ADMIN                # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu excluo a empresa                           # br.com.fiap.ecotrack.bdd.EmpresaSteps.euExcluoAEmpresa()
+  ✔ Então a resposta tem status 204                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E a empresa não é mais encontrada                    # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaNaoEMaisEncontrada()
+
+        POST http://localhost:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.898.755/5689-17","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (84 ms)
+        {
+            "id": 62,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.898.755/5689-17",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        DELETE http://localhost:8080/api/empresas/62
+        => HTTP/1.1 204  (81 ms)
+        
+        GET http://localhost:8080/api/empresas/62
+        => HTTP/1.1 404  (7 ms)
+        {
+            "status": 404,
+            "mensagem": "Empresa não encontrada com ID: 62",
+            "dataHora": "2026-11-06T22:00:26.083553084"
+        }
+        
+
+
+Failed scenarios:
+  1) Cadastrar uma empresa # classpath:features/empresas.feature:12
+       java.lang.AssertionError: [violações do contrato empresa.json] 
+       Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+       	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+       	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:19)
+
+  2) Consultar uma empresa pelo id # classpath:features/empresas.feature:25
+       java.lang.AssertionError: [violações do contrato empresa.json] 
+       Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+       	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+       	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:29)
+
+  3) Listar as empresas # classpath:features/empresas.feature:33
+       java.lang.AssertionError: [violações do contrato lista-empresas.json] 
+       Expecting empty but was: ["$[0]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+           "$[1]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+           "$[2]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+           "$[3]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+       	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+       	at ✽.o corpo segue o contrato "lista-empresas"(classpath:features/empresas.feature:37)
+
+  4) Mudar o setor e a cidade de uma empresa # classpath:features/empresas.feature:41
+       java.lang.AssertionError: [violações do contrato empresa.json] 
+       Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+       	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+       	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:45)
+
+
+5 scenarios (1 passed, 4 failed)
+36 steps (25 passed, 7 skipped, 4 failed)
+0m 2.292s
+[ERROR] Tests run: 56, Failures: 4, Errors: 0, Skipped: 51, Time elapsed: 2.480 s <<< FAILURE! -- in br.com.fiap.ecotrack.bdd.ExecutarCenariosTest
+[ERROR] br.com.fiap.ecotrack.bdd.ExecutarCenariosTest.Cadastro de empresas - Cadastrar uma empresa -- Time elapsed: 0.609 s <<< FAILURE!
+java.lang.AssertionError: 
+[violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:19)
+
+[ERROR] br.com.fiap.ecotrack.bdd.ExecutarCenariosTest.Cadastro de empresas - Consultar uma empresa pelo id -- Time elapsed: 0.272 s <<< FAILURE!
+java.lang.AssertionError: 
+[violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:29)
+
+[ERROR] br.com.fiap.ecotrack.bdd.ExecutarCenariosTest.Cadastro de empresas - Listar as empresas -- Time elapsed: 0.279 s <<< FAILURE!
+java.lang.AssertionError: 
+[violações do contrato lista-empresas.json] 
+Expecting empty but was: ["$[0]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[1]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[2]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[3]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+	at ✽.o corpo segue o contrato "lista-empresas"(classpath:features/empresas.feature:37)
+
+[ERROR] br.com.fiap.ecotrack.bdd.ExecutarCenariosTest.Cadastro de empresas - Mudar o setor e a cidade de uma empresa -- Time elapsed: 0.280 s <<< FAILURE!
+java.lang.AssertionError: 
+[violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+	at br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(RespostaSteps.java:32)
+	at ✽.o corpo segue o contrato "empresa"(classpath:features/empresas.feature:45)
+
+[INFO] 
+[INFO] Results:
+[INFO] 
+[ERROR] Failures: 
+[ERROR]   ExecutarCenariosTest.Cadastro de empresas - Cadastrar uma empresa [violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+[ERROR]   ExecutarCenariosTest.Cadastro de empresas - Consultar uma empresa pelo id [violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+[ERROR]   ExecutarCenariosTest.Cadastro de empresas - Listar as empresas [violações do contrato lista-empresas.json] 
+Expecting empty but was: ["$[0]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[1]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[2]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais",
+    "$[3]: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+[ERROR]   ExecutarCenariosTest.Cadastro de empresas - Mudar o setor e a cidade de uma empresa [violações do contrato empresa.json] 
+Expecting empty but was: ["$: a propriedade 'dataCadastro' não está definida no esquema e o esquema não permite propriedades adicionais"]
+[INFO] 
+[ERROR] Tests run: 56, Failures: 4, Errors: 0, Skipped: 51
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD FAILURE
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  3.231 s
+[INFO] Finished at: 2026-11-06T22:00:26-03:00
+[INFO] ------------------------------------------------------------------------
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-surefire-plugin:3.5.6:test (default-cli) on project ecotrack-testes: There are test failures.
+[ERROR] 
+[ERROR] See /Users/paulosouza/Downloads/Projeto ESG/EcoTrack Testes - RM566228/ecotrack-testes/testes/target/surefire-reports for the individual test results.
+[ERROR] See dump files (if any exist) [date].dump, [date]-jvmRun[N].dump and [date].dumpstream.
+[ERROR] -> [Help 1]
+[ERROR] 
+[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
+[ERROR] Re-run Maven using the -X switch to enable full debug logging.
+[ERROR] 
+[ERROR] For more information about the errors and possible solutions, please read the following articles:
+[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException

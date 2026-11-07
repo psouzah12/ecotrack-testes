@@ -1,0 +1,3103 @@
+$ MANTER_AMBIENTE=1 scripts/executar-testes.sh
+==> Subindo Oracle e API (na primeira vez leva uns 2 minutos)
+ Network ecotrack-testes_default Creating 
+ Network ecotrack-testes_default Created 
+ Container ecotrack-testes-oracle-1 Creating 
+ Container ecotrack-testes-oracle-1 Created 
+ Container ecotrack-testes-api-1 Creating 
+ Container ecotrack-testes-api-1 Created 
+ Container ecotrack-testes-oracle-1 Starting 
+ Container ecotrack-testes-oracle-1 Started 
+ Container ecotrack-testes-oracle-1 Waiting 
+ Container ecotrack-testes-oracle-1 Healthy 
+ Container ecotrack-testes-api-1 Starting 
+ Container ecotrack-testes-api-1 Started 
+ Container ecotrack-testes-oracle-1 Waiting 
+ Container ecotrack-testes-api-1 Waiting 
+ Container ecotrack-testes-oracle-1 Healthy 
+ Container ecotrack-testes-api-1 Healthy 
+SERVICE   IMAGE                                        STATUS
+api       ghcr.io/psouzah12/ecotrack-api:sha-92e76ea   Up 10 seconds (healthy)
+oracle    gvenzl/oracle-free:23-slim                   Up 21 seconds (healthy)
+==> API em http://localhost:8080
+==> Rodando os cenários
+ Container ecotrack-testes-oracle-1 Running 
+ Container ecotrack-testes-api-1 Running 
+ Container ecotrack-testes-oracle-1 Waiting 
+ Container ecotrack-testes-oracle-1 Healthy 
+ Image ecotrack-testes-testes Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 646B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 611B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/maven:3.9.9-eclipse-temurin-21
+#3 DONE 0.0s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 56B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 4.42kB done
+#5 DONE 0.0s
+
+#6 [1/5] FROM docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e
+#6 resolve docker.io/library/maven:3.9.9-eclipse-temurin-21@sha256:3a4ab3276a087bf276f79cae96b1af04f53731bec53fb2e651aca79e4b10211e done
+#6 DONE 0.0s
+
+#7 [2/5] WORKDIR /testes
+#7 CACHED
+
+#8 [3/5] COPY pom.xml .
+#8 CACHED
+
+#9 [4/5] RUN mvn -B -ntp dependency:go-offline
+#9 CACHED
+
+#10 [5/5] COPY src ./src
+#10 DONE 0.2s
+
+#11 exporting to image
+#11 exporting layers 0.0s done
+#11 exporting manifest sha256:a6a5543e8507ef268b878fde3737a21b2a3cbf8feae738c88ac40b3c2b920f3f done
+#11 exporting config sha256:2ab639f10ba78a8ee8fb476ddd285aa34c45c080a1de6210309d9c8a04200bad done
+#11 exporting attestation manifest sha256:9a6bbb2abf31fe7a8c4e4be3f23c711d3bb94c18afaf67619cce38f3fa572edf done
+#11 exporting manifest list sha256:cbeb2046e881cfbfb10a4b2870f324122e48a62e3a6c8bd61026eb05087cdf00 done
+#11 naming to docker.io/library/ecotrack-testes-testes:latest done
+#11 unpacking to docker.io/library/ecotrack-testes-testes:latest 0.0s done
+#11 DONE 0.1s
+
+#12 resolving provenance for metadata file
+#12 DONE 0.0s
+ Image ecotrack-testes-testes Built 
+ Container ecotrack-testes-api-1 Waiting 
+ Container ecotrack-testes-api-1 Healthy 
+ Container ecotrack-testes-testes-run-7997e94201d1 Creating 
+ Container ecotrack-testes-testes-run-7997e94201d1 Created 
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] --------------------< br.com.fiap:ecotrack-testes >---------------------
+[INFO] Building EcoTrack - testes BDD da API 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ ecotrack-testes ---
+[INFO] skip non existing resourceDirectory /testes/src/main/resources
+[INFO] 
+[INFO] --- compiler:3.14.1:compile (default-compile) @ ecotrack-testes ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ ecotrack-testes ---
+[INFO] Copying 21 resources from src/test/resources to target/test-classes
+[INFO] 
+[INFO] --- compiler:3.14.1:testCompile (default-testCompile) @ ecotrack-testes ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 12 source files with javac [debug release 21] to target/test-classes
+[INFO] 
+[INFO] --- surefire:3.5.6:test (default-test) @ ecotrack-testes ---
+[INFO] Using auto detected provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running br.com.fiap.ecotrack.bdd.ExecutarCenariosTest
+
+@acesso @governanca @positivo @eficiencia
+Esquema do Cenário: Consultar dados públicos sem login                                   # classpath:features/acesso.feature:21
+  ✔ Dado que existe uma empresa cadastrada                                               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 100 "m3" de "AGUA"                                         # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que não estou autenticado                                                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/api/empresas"                                                   # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200                                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-empresas"                                          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a resposta chega em menos de 2000 ms                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaChegaEmMenosDe(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.616.193/3174-81","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (271 ms)
+        {
+            "id": 4,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.616.193/3174-81",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":4,"tipo":"AGUA","valor":100,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (109 ms)
+        {
+            "id": 5,
+            "empresaId": 4,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 100,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":4,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (91 ms)
+        {
+            "id": 4,
+            "empresaId": 4,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/empresas
+        => HTTP/1.1 200  (14 ms)
+        [
+            {
+                "id": 4,
+                "nome": "Verde Vale Reciclagem",
+                "cnpj": "98.616.193/3174-81",
+                "setor": "Reciclagem",
+                "cidade": "Santos",
+                "estado": "SP",
+                "dataCadastro": "2026-11-06"
+            },
+            {
+                "id": 1,
+                "nome": "Verde Bebidas LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "setor": "Bebidas",
+                "cidade": "Sao Paulo",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 2,
+                "nome": "Solar Tech S.A.",
+                "cnpj": "23.456.789/0001-12",
+                "setor": "Energia",
+                "cidade": "Campinas",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 3,
+                "nome": "Empresa Teste Delete",
+                "cnpj": "11.222.333/0001-44",
+                "setor": "Servicos",
+                "cidade": "Rio de Janeiro",
+                "estado": "RJ",
+                "dataCadastro": "2026-11-07"
+            }
+        ]
+        
+
+
+@acesso @governanca @positivo @eficiencia
+Esquema do Cenário: Consultar dados públicos sem login                                   # classpath:features/acesso.feature:22
+  ✔ Dado que existe uma empresa cadastrada                                               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 100 "m3" de "AGUA"                                         # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que não estou autenticado                                                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/api/indicadores"                                                # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200                                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-indicadores"                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a resposta chega em menos de 2000 ms                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaChegaEmMenosDe(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.391.891/1144-80","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 5,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.391.891/1144-80",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":5,"tipo":"AGUA","valor":100,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 6,
+            "empresaId": 5,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 100,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":5,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (92 ms)
+        {
+            "id": 5,
+            "empresaId": 5,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/indicadores
+        => HTTP/1.1 200  (13 ms)
+        [
+            {
+                "id": 6,
+                "empresaId": 5,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "AGUA",
+                "valor": 100,
+                "unidadeMedida": "m3",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            },
+            {
+                "id": 1,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "AGUA",
+                "valor": 1500.5,
+                "unidadeMedida": "m3",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Consumo mensal de agua"
+            },
+            {
+                "id": 2,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "ENERGIA",
+                "valor": 8200,
+                "unidadeMedida": "kWh",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Consumo mensal de energia eletrica"
+            },
+            {
+                "id": 3,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "RESIDUOS",
+                "valor": 350,
+                "unidadeMedida": "kg",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Geracao mensal de residuos"
+            },
+            {
+                "id": 4,
+                "empresaId": 2,
+                "empresaNome": "Solar Tech S.A.",
+                "tipo": "EMISSAO_CO2",
+                "valor": 1200,
+                "unidadeMedida": "tCO2e",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Emissoes do trimestre"
+            }
+        ]
+        
+
+
+@acesso @governanca @positivo @eficiencia
+Esquema do Cenário: Consultar dados públicos sem login                                   # classpath:features/acesso.feature:23
+  ✔ Dado que existe uma empresa cadastrada                                               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 100 "m3" de "AGUA"                                         # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que não estou autenticado                                                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/api/acoes-esg"                                                  # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200                                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-acoes"                                             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a resposta chega em menos de 2000 ms                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaChegaEmMenosDe(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.349.031/7280-44","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (81 ms)
+        {
+            "id": 6,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.349.031/7280-44",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":6,"tipo":"AGUA","valor":100,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (97 ms)
+        {
+            "id": 7,
+            "empresaId": 6,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 100,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":6,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (87 ms)
+        {
+            "id": 6,
+            "empresaId": 6,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/acoes-esg
+        => HTTP/1.1 200  (11 ms)
+        [
+            {
+                "id": 6,
+                "empresaId": 6,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Coleta seletiva no refeitório",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "RECICLAGEM",
+                "status": "PLANEJADA",
+                "impactoEstimado": 350,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            },
+            {
+                "id": 1,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "titulo": "Troca de lampadas por LED",
+                "descricao": "Substituicao de lampadas antigas por modelos LED para reduzir consumo energetico.",
+                "categoria": "EFICIENCIA_ENERGETICA",
+                "status": "EM_ANDAMENTO",
+                "impactoEstimado": 1200,
+                "dataInicio": "2026-05-10",
+                "dataFimPrevista": "2026-06-10"
+            },
+            {
+                "id": 2,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "titulo": "Campanha de reciclagem interna",
+                "descricao": "Programa de conscientizacao e separacao correta de residuos reciclaveis.",
+                "categoria": "RECICLAGEM",
+                "status": "PLANEJADA",
+                "impactoEstimado": 500,
+                "dataInicio": "2026-06-01",
+                "dataFimPrevista": "2026-07-01"
+            },
+            {
+                "id": 3,
+                "empresaId": 2,
+                "empresaNome": "Solar Tech S.A.",
+                "titulo": "Compensacao via reflorestamento",
+                "descricao": "Plantio de 5000 mudas nativas em area degradada na Mata Atlantica.",
+                "categoria": "COMPENSACAO_CARBONO",
+                "status": "PLANEJADA",
+                "impactoEstimado": 850,
+                "dataInicio": "2026-07-01",
+                "dataFimPrevista": "2026-12-31"
+            }
+        ]
+        
+
+
+@acesso @governanca @positivo @eficiencia
+Esquema do Cenário: Consultar dados públicos sem login                                   # classpath:features/acesso.feature:24
+  ✔ Dado que existe uma empresa cadastrada                                               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 100 "m3" de "AGUA"                                         # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que não estou autenticado                                                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/api/relatorios/resumo"                                          # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200                                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "resumo"                                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a resposta chega em menos de 2000 ms                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaChegaEmMenosDe(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.744.527/9676-12","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 7,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.744.527/9676-12",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":7,"tipo":"AGUA","valor":100,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 8,
+            "empresaId": 7,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 100,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":7,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 7,
+            "empresaId": 7,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/resumo
+        => HTTP/1.1 200  (117 ms)
+        {
+            "totalEmpresas": 4,
+            "totalIndicadores": 5,
+            "totalAcoes": 4,
+            "acoesConcluidas": 0,
+            "impactoTotalEstimado": 2900
+        }
+        
+
+
+@acesso @governanca @positivo
+Cenário: Perfil USER consulta os relatórios     # classpath:features/acesso.feature:27
+  ✔ Dado que estou autenticado como USER        # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu consulto "/api/relatorios/resumo" # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200             # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "resumo"         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+
+        GET http://api:8080/api/relatorios/resumo
+        => HTTP/1.1 200  (89 ms)
+        {
+            "totalEmpresas": 3,
+            "totalIndicadores": 4,
+            "totalAcoes": 3,
+            "acoesConcluidas": 0,
+            "impactoTotalEstimado": 2550
+        }
+        
+
+
+@acesso @governanca @negativo
+Cenário: Cadastro sem login               # classpath:features/acesso.feature:34
+  ✔ Dado que não estou autenticado        # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu tento cadastrar uma empresa # br.com.fiap.ecotrack.bdd.AcessoSteps.euTentoCadastrarUmaEmpresa()
+  ✔ Então a resposta tem status 401       # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E a resposta pede autenticação Basic  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaPedeAutenticacaoBasic()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Cadastro sem permissão","cnpj":"98.001.565/7622-51","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 401  (11 ms)
+        
+
+
+@acesso @governanca @negativo
+Cenário: Cadastro com senha errada                                   # classpath:features/acesso.feature:41
+  ✔ Dado que estou autenticado como ADMIN com a senha "senha-errada" # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComoAdminComASenha(java.lang.String)
+  ✔ Quando eu tento cadastrar uma empresa                            # br.com.fiap.ecotrack.bdd.AcessoSteps.euTentoCadastrarUmaEmpresa()
+  ✔ Então a resposta tem status 401                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E a resposta pede autenticação Basic                             # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaPedeAutenticacaoBasic()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Cadastro sem permissão","cnpj":"98.913.723/4537-16","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 401  (79 ms)
+        
+
+
+@acesso @governanca @negativo
+Esquema do Cenário: Perfil USER não altera dados # classpath:features/acesso.feature:56
+  ✔ Dado que estou autenticado como USER         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu envio POST para "/api/empresas"    # br.com.fiap.ecotrack.bdd.AcessoSteps.euEnvioPara(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 403              # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acesso-negado"   # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {}
+        => HTTP/1.1 403  (83 ms)
+        {
+            "timestamp": "2026-11-07T00:59:51.950+00:00",
+            "status": 403,
+            "error": "Forbidden",
+            "path": "/api/empresas"
+        }
+        
+
+
+@acesso @governanca @negativo
+Esquema do Cenário: Perfil USER não altera dados  # classpath:features/acesso.feature:57
+  ✔ Dado que estou autenticado como USER          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu envio PUT para "/api/indicadores/1" # br.com.fiap.ecotrack.bdd.AcessoSteps.euEnvioPara(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 403               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acesso-negado"    # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+
+        PUT http://api:8080/api/indicadores/1
+        {}
+        => HTTP/1.1 403  (84 ms)
+        {
+            "timestamp": "2026-11-07T00:59:52.047+00:00",
+            "status": 403,
+            "error": "Forbidden",
+            "path": "/api/indicadores/1"
+        }
+        
+
+
+@acesso @governanca @negativo
+Esquema do Cenário: Perfil USER não altera dados         # classpath:features/acesso.feature:58
+  ✔ Dado que estou autenticado como USER                 # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu envio PATCH para "/api/acoes-esg/1/status" # br.com.fiap.ecotrack.bdd.AcessoSteps.euEnvioPara(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 403                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acesso-negado"           # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+
+        PATCH http://api:8080/api/acoes-esg/1/status
+        {}
+        => HTTP/1.1 403  (77 ms)
+        {
+            "timestamp": "2026-11-07T00:59:52.130+00:00",
+            "status": 403,
+            "error": "Forbidden",
+            "path": "/api/acoes-esg/1/status"
+        }
+        
+
+
+@acesso @governanca @negativo
+Esquema do Cenário: Perfil USER não altera dados  # classpath:features/acesso.feature:59
+  ✔ Dado que estou autenticado como USER          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu envio DELETE para "/api/empresas/1" # br.com.fiap.ecotrack.bdd.AcessoSteps.euEnvioPara(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 403               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acesso-negado"    # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+
+        DELETE http://api:8080/api/empresas/1
+        {}
+        => HTTP/1.1 403  (76 ms)
+        {
+            "timestamp": "2026-11-07T00:59:52.213+00:00",
+            "status": 403,
+            "error": "Forbidden",
+            "path": "/api/empresas/1"
+        }
+        
+
+
+@acoes @positivo
+Cenário: Planejar uma ação de coleta seletiva      # classpath:features/acoes-esg.feature:13
+  ✔ Dado que estou autenticado como ADMIN          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada            # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu cadastro a ação:                     # br.com.fiap.ecotrack.bdd.AcaoSteps.euCadastroAAcao(java.util.Map)
+      | titulo          | Coleta seletiva no refeitório                        |
+      | descricao       | Lixeiras separadas e coleta semanal pela cooperativa |
+      | categoria       | RECICLAGEM                                           |
+      | status          | PLANEJADA                                            |
+      | impactoEstimado | 350,00                                               |
+      | dataInicio      | 2026-11-16                                           |
+      | dataFimPrevista | 2027-02-16                                           |
+  ✔ Então a resposta tem status 201                # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"              # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "categoria" vale "RECICLAGEM"        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "status" vale "PLANEJADA"            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "empresaNome" vale o nome da empresa # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeONomeDaEmpresa(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.010.013/6847-67","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 8,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.010.013/6847-67",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"titulo":"Coleta seletiva no refeitório","descricao":"Lixeiras separadas e coleta semanal pela cooperativa","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350.00,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16","empresaId":8}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 8,
+            "empresaId": 8,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Lixeiras separadas e coleta semanal pela cooperativa",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350.00,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Esquema do Cenário: Atualizar o andamento de uma ação                                       # classpath:features/acoes-esg.feature:38
+  ✔ Dado que estou autenticado como ADMIN                                                   # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                     # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu mudo o status da ação para "EM_ANDAMENTO"                                     # br.com.fiap.ecotrack.bdd.AcaoSteps.euMudoOStatusDaAcao(java.lang.String)
+  ✔ Então a resposta tem status 200                                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"                                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "status" vale "EM_ANDAMENTO"                                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.574.978/6233-78","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (83 ms)
+        {
+            "id": 9,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.574.978/6233-78",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":9,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (81 ms)
+        {
+            "id": 9,
+            "empresaId": 9,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        PATCH http://api:8080/api/acoes-esg/9/status
+        {"status":"EM_ANDAMENTO"}
+        => HTTP/1.1 200  (89 ms)
+        {
+            "id": 9,
+            "empresaId": 9,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "EM_ANDAMENTO",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Esquema do Cenário: Atualizar o andamento de uma ação                                       # classpath:features/acoes-esg.feature:39
+  ✔ Dado que estou autenticado como ADMIN                                                   # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                     # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu mudo o status da ação para "CONCLUIDA"                                        # br.com.fiap.ecotrack.bdd.AcaoSteps.euMudoOStatusDaAcao(java.lang.String)
+  ✔ Então a resposta tem status 200                                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"                                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "status" vale "CONCLUIDA"                                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.125.206/7627-17","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 10,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.125.206/7627-17",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":10,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 10,
+            "empresaId": 10,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        PATCH http://api:8080/api/acoes-esg/10/status
+        {"status":"CONCLUIDA"}
+        => HTTP/1.1 200  (79 ms)
+        {
+            "id": 10,
+            "empresaId": 10,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Esquema do Cenário: Atualizar o andamento de uma ação                                       # classpath:features/acoes-esg.feature:40
+  ✔ Dado que estou autenticado como ADMIN                                                   # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                     # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu mudo o status da ação para "CANCELADA"                                        # br.com.fiap.ecotrack.bdd.AcaoSteps.euMudoOStatusDaAcao(java.lang.String)
+  ✔ Então a resposta tem status 200                                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"                                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "status" vale "CANCELADA"                                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.909.011/2281-20","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 11,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.909.011/2281-20",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":11,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 11,
+            "empresaId": 11,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        PATCH http://api:8080/api/acoes-esg/11/status
+        {"status":"CANCELADA"}
+        => HTTP/1.1 200  (78 ms)
+        {
+            "id": 11,
+            "empresaId": 11,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "CANCELADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Cenário: Consultar uma ação pelo id                                                                        # classpath:features/acoes-esg.feature:43
+  ✔ Dado que estou autenticado como ADMIN                                                                  # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                                    # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "EM_ANDAMENTO" e impacto de 1200 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto a ação                                                                              # br.com.fiap.ecotrack.bdd.AcaoSteps.euConsultoAAcao()
+  ✔ Então a resposta tem status 200                                                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"                                                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "titulo" vale "Troca das lâmpadas do galpão por LED"                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "impactoEstimado" vale 1200                                                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.297.680/7314-15","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 12,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.297.680/7314-15",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":12,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"EM_ANDAMENTO","impactoEstimado":1200,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 12,
+            "empresaId": 12,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "EM_ANDAMENTO",
+            "impactoEstimado": 1200,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/acoes-esg/12
+        => HTTP/1.1 200  (78 ms)
+        {
+            "id": 12,
+            "empresaId": 12,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "EM_ANDAMENTO",
+            "impactoEstimado": 1200,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Cenário: Listar as ações de uma empresa                                                          # classpath:features/acoes-esg.feature:52
+  ✔ Dado que estou autenticado como ADMIN                                                        # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                          # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350      # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "REDUCAO_CONSUMO" com status "EM_ANDAMENTO" e impacto de 800 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu listo as ações da empresa                                                          # br.com.fiap.ecotrack.bdd.AcaoSteps.euListoAsAcoesDaEmpresa()
+  ✔ Então a resposta tem status 200                                                              # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-acoes"                                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a lista tem 2 itens                                                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.aListaTemItens(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.627.898/8187-91","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 13,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.627.898/8187-91",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":13,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 13,
+            "empresaId": 13,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":13,"titulo":"Reúso da água da lavagem de pisos","descricao":"Cadastrada pelos testes BDD","categoria":"REDUCAO_CONSUMO","status":"EM_ANDAMENTO","impactoEstimado":800,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 14,
+            "empresaId": 13,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Reúso da água da lavagem de pisos",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "REDUCAO_CONSUMO",
+            "status": "EM_ANDAMENTO",
+            "impactoEstimado": 800,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/acoes-esg/empresa/13
+        => HTTP/1.1 200  (81 ms)
+        [
+            {
+                "id": 13,
+                "empresaId": 13,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Coleta seletiva no refeitório",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "RECICLAGEM",
+                "status": "PLANEJADA",
+                "impactoEstimado": 350,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            },
+            {
+                "id": 14,
+                "empresaId": 13,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Reúso da água da lavagem de pisos",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "REDUCAO_CONSUMO",
+                "status": "EM_ANDAMENTO",
+                "impactoEstimado": 800,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            }
+        ]
+        
+
+
+@acoes @positivo
+Cenário: Filtrar as ações concluídas                                                                 # classpath:features/acoes-esg.feature:61
+  ✔ Dado que estou autenticado como ADMIN                                                            # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                              # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "COMPENSACAO_CARBONO" com status "CONCLUIDA" e impacto de 500 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu listo as ações com status "CONCLUIDA"                                                  # br.com.fiap.ecotrack.bdd.AcaoSteps.euListoAsAcoesComStatus(java.lang.String)
+  ✔ Então a resposta tem status 200                                                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-acoes"                                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E todos os itens têm "status" igual a "CONCLUIDA"                                                # br.com.fiap.ecotrack.bdd.RespostaSteps.todosOsItensTem(java.lang.String,java.lang.String)
+  ✔ E a ação cadastrada está na lista                                                                # br.com.fiap.ecotrack.bdd.AcaoSteps.aAcaoCadastradaEstaNaLista()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.020.661/5680-18","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 14,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.020.661/5680-18",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":14,"titulo":"Plantio de mudas nativas","descricao":"Cadastrada pelos testes BDD","categoria":"COMPENSACAO_CARBONO","status":"CONCLUIDA","impactoEstimado":500,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 15,
+            "empresaId": 14,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Plantio de mudas nativas",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "COMPENSACAO_CARBONO",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 500,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/acoes-esg?status=CONCLUIDA
+        => HTTP/1.1 200  (87 ms)
+        [
+            {
+                "id": 15,
+                "empresaId": 14,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Plantio de mudas nativas",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "COMPENSACAO_CARBONO",
+                "status": "CONCLUIDA",
+                "impactoEstimado": 500,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            }
+        ]
+        
+
+
+@acoes @positivo
+Cenário: Ampliar uma ação já cadastrada                                                                # classpath:features/acoes-esg.feature:70
+  ✔ Dado que estou autenticado como ADMIN                                                              # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                                # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu altero o título da ação para "Coleta seletiva em todas as unidades" e o impacto para 900 # br.com.fiap.ecotrack.bdd.AcaoSteps.euAlteroATituloEImpacto(java.lang.String,java.math.BigDecimal)
+  ✔ Então a resposta tem status 200                                                                    # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "acao"                                                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "titulo" vale "Coleta seletiva em todas as unidades"                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "impactoEstimado" vale 900                                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.196.173/6688-18","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 15,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.196.173/6688-18",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":15,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 16,
+            "empresaId": 15,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        PUT http://api:8080/api/acoes-esg/16
+        {"empresaId":15,"titulo":"Coleta seletiva em todas as unidades","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":900,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 200  (80 ms)
+        {
+            "id": 16,
+            "empresaId": 15,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva em todas as unidades",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 900,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+
+
+@acoes @positivo
+Cenário: Excluir uma ação                                                                         # classpath:features/acoes-esg.feature:79
+  ✔ Dado que estou autenticado como ADMIN                                                         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                           # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "EDUCACAO_AMBIENTAL" com status "CANCELADA" e impacto de 0 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu excluo a ação                                                                       # br.com.fiap.ecotrack.bdd.AcaoSteps.euExcluoAAcao()
+  ✔ Então a resposta tem status 204                                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E a ação não é mais encontrada                                                                # br.com.fiap.ecotrack.bdd.AcaoSteps.aAcaoNaoEMaisEncontrada()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.801.205/7872-80","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 16,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.801.205/7872-80",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":16,"titulo":"Treinamento sobre descarte de resíduos","descricao":"Cadastrada pelos testes BDD","categoria":"EDUCACAO_AMBIENTAL","status":"CANCELADA","impactoEstimado":0,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 17,
+            "empresaId": 16,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Treinamento sobre descarte de resíduos",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EDUCACAO_AMBIENTAL",
+            "status": "CANCELADA",
+            "impactoEstimado": 0,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        DELETE http://api:8080/api/acoes-esg/17
+        => HTTP/1.1 204  (76 ms)
+        
+        GET http://api:8080/api/acoes-esg/17
+        => HTTP/1.1 404  (7 ms)
+        {
+            "status": 404,
+            "mensagem": "Ação ESG não encontrada com ID: 17",
+            "dataHora": "2026-11-06T21:59:55.952602334"
+        }
+        
+
+
+@acoes @negativo
+Cenário: Recusar um status que não existe                                                   # classpath:features/acoes-esg.feature:86
+  ✔ Dado que estou autenticado como ADMIN                                                   # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                     # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu mudo o status da ação para "ARQUIVADA"                                        # br.com.fiap.ecotrack.bdd.AcaoSteps.euMudoOStatusDaAcao(java.lang.String)
+  ✔ Então a resposta tem status 400                                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Corpo da requisição inválido ou mal formatado."                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.634.958/9611-54","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 17,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.634.958/9611-54",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":17,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":350,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (82 ms)
+        {
+            "id": 18,
+            "empresaId": 17,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 350,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        PATCH http://api:8080/api/acoes-esg/18/status
+        {"status":"ARQUIVADA"}
+        => HTTP/1.1 400  (79 ms)
+        {
+            "status": 400,
+            "mensagem": "Corpo da requisição inválido ou mal formatado.",
+            "dataHora": "2026-11-06T21:59:56.367588459"
+        }
+        
+
+
+@acoes @negativo @inclusao
+Cenário: Apontar todos os campos obrigatórios que faltam               # classpath:features/acoes-esg.feature:94
+  ✔ Dado que estou autenticado como ADMIN                              # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu cadastro uma ação só com a descrição                     # br.com.fiap.ecotrack.bdd.AcaoSteps.euCadastroUmaAcaoSoComADescricao()
+  ✔ Então a resposta tem status 400                                    # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erros-validacao"                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "titulo" tem o erro "O título é obrigatório"             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+  ✔ E o campo "categoria" tem o erro "A categoria é obrigatória"       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+  ✔ E o campo "status" tem o erro "O status é obrigatório"             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+  ✔ E o campo "dataInicio" tem o erro "A data de início é obrigatória" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.335.038/1872-66","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 18,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.335.038/1872-66",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"descricao":"Ação sem os campos obrigatórios","empresaId":18}
+        => HTTP/1.1 400  (78 ms)
+        [
+            {
+                "campo": "categoria",
+                "mensagem": "A categoria é obrigatória"
+            },
+            {
+                "campo": "titulo",
+                "mensagem": "O título é obrigatório"
+            },
+            {
+                "campo": "dataInicio",
+                "mensagem": "A data de início é obrigatória"
+            },
+            {
+                "campo": "status",
+                "mensagem": "O status é obrigatório"
+            }
+        ]
+        
+
+
+@acoes @negativo
+Cenário: Mudar o status de uma ação que não existe                  # classpath:features/acoes-esg.feature:104
+  ✔ Dado que estou autenticado como ADMIN                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu mudo o status da ação de id 999999 para "CONCLUIDA"   # br.com.fiap.ecotrack.bdd.AcaoSteps.euMudoOStatusDaAcaoDeId(long,java.lang.String)
+  ✔ Então a resposta tem status 404                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Ação ESG não encontrada com ID: 999999" # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.836.901/1045-17","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 19,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.836.901/1045-17",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        PATCH http://api:8080/api/acoes-esg/999999/status
+        {"status":"CONCLUIDA"}
+        => HTTP/1.1 404  (75 ms)
+        {
+            "status": 404,
+            "mensagem": "Ação ESG não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T21:59:56.938231335"
+        }
+        
+
+
+@acoes @negativo
+Cenário: Consultar uma ação que não existe                          # classpath:features/acoes-esg.feature:111
+  ✔ Dado que estou autenticado como ADMIN                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto "/api/acoes-esg/999999"                      # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 404                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Ação ESG não encontrada com ID: 999999" # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.051.180/2735-62","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (81 ms)
+        {
+            "id": 20,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.051.180/2735-62",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/acoes-esg/999999
+        => HTTP/1.1 404  (76 ms)
+        {
+            "status": 404,
+            "mensagem": "Ação ESG não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T21:59:57.18674996"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Cadastrar uma empresa                       # classpath:features/empresas.feature:12
+  ✔ Dado que estou autenticado como ADMIN            # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu cadastro a empresa:                    # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroAEmpresa(java.util.Map)
+      | nome   | Reciclar Embalagens LTDA |
+      | setor  | Reciclagem               |
+      | cidade | Santos                   |
+      | estado | sp                       |
+  ✔ Então a resposta tem status 201                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "empresa"             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "nome" vale "Reciclar Embalagens LTDA" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "estado" vale "SP"                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E a empresa aparece na listagem de empresas      # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaApareceNaListagem()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Reciclar Embalagens LTDA","cnpj":"98.248.483/4521-84","setor":"Reciclagem","cidade":"Santos","estado":"sp"}
+        => HTTP/1.1 201  (83 ms)
+        {
+            "id": 21,
+            "nome": "Reciclar Embalagens LTDA",
+            "cnpj": "98.248.483/4521-84",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/empresas
+        => HTTP/1.1 200  (4 ms)
+        [
+            {
+                "id": 21,
+                "nome": "Reciclar Embalagens LTDA",
+                "cnpj": "98.248.483/4521-84",
+                "setor": "Reciclagem",
+                "cidade": "Santos",
+                "estado": "SP",
+                "dataCadastro": "2026-11-06"
+            },
+            {
+                "id": 1,
+                "nome": "Verde Bebidas LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "setor": "Bebidas",
+                "cidade": "Sao Paulo",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 2,
+                "nome": "Solar Tech S.A.",
+                "cnpj": "23.456.789/0001-12",
+                "setor": "Energia",
+                "cidade": "Campinas",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 3,
+                "nome": "Empresa Teste Delete",
+                "cnpj": "11.222.333/0001-44",
+                "setor": "Servicos",
+                "cidade": "Rio de Janeiro",
+                "estado": "RJ",
+                "dataCadastro": "2026-11-07"
+            }
+        ]
+        
+
+
+@empresas @positivo
+Cenário: Consultar uma empresa pelo id            # classpath:features/empresas.feature:25
+  ✔ Dado que estou autenticado como ADMIN         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada        # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto a empresa                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.euConsultoAEmpresa()
+  ✔ Então a resposta tem status 200               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "empresa"          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o corpo traz os dados da empresa cadastrada # br.com.fiap.ecotrack.bdd.EmpresaSteps.oCorpoTrazOsDadosDaEmpresaCadastrada()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.818.465/6656-77","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 22,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.818.465/6656-77",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/empresas/22
+        => HTTP/1.1 200  (79 ms)
+        {
+            "id": 22,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.818.465/6656-77",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Listar as empresas                     # classpath:features/empresas.feature:33
+  ✔ Dado que estou autenticado como ADMIN       # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada      # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto "/api/empresas"          # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200             # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-empresas" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a empresa cadastrada está na lista        # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaCadastradaEstaNaLista()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.217.722/3232-62","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 23,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.217.722/3232-62",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/empresas
+        => HTTP/1.1 200  (77 ms)
+        [
+            {
+                "id": 23,
+                "nome": "Verde Vale Reciclagem",
+                "cnpj": "98.217.722/3232-62",
+                "setor": "Reciclagem",
+                "cidade": "Santos",
+                "estado": "SP",
+                "dataCadastro": "2026-11-06"
+            },
+            {
+                "id": 1,
+                "nome": "Verde Bebidas LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "setor": "Bebidas",
+                "cidade": "Sao Paulo",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 2,
+                "nome": "Solar Tech S.A.",
+                "cnpj": "23.456.789/0001-12",
+                "setor": "Energia",
+                "cidade": "Campinas",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 3,
+                "nome": "Empresa Teste Delete",
+                "cnpj": "11.222.333/0001-44",
+                "setor": "Servicos",
+                "cidade": "Rio de Janeiro",
+                "estado": "RJ",
+                "dataCadastro": "2026-11-07"
+            }
+        ]
+        
+
+
+@empresas @positivo
+Cenário: Mudar o setor e a cidade de uma empresa                                  # classpath:features/empresas.feature:41
+  ✔ Dado que estou autenticado como ADMIN                                         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada                                        # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu altero a empresa para o setor "Energia solar" e a cidade "Campinas" # br.com.fiap.ecotrack.bdd.EmpresaSteps.euAlteroAEmpresa(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 200                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "empresa"                                          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "setor" vale "Energia solar"                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "cidade" vale "Campinas"                                            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.599.465/3283-01","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 24,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.599.465/3283-01",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        PUT http://api:8080/api/empresas/24
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.599.465/3283-01","setor":"Energia solar","cidade":"Campinas","estado":"SP"}
+        => HTTP/1.1 200  (79 ms)
+        {
+            "id": 24,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.599.465/3283-01",
+            "setor": "Energia solar",
+            "cidade": "Campinas",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+
+
+@empresas @positivo
+Cenário: Excluir uma empresa sem registros ligados a ela # classpath:features/empresas.feature:50
+  ✔ Dado que estou autenticado como ADMIN                # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu excluo a empresa                           # br.com.fiap.ecotrack.bdd.EmpresaSteps.euExcluoAEmpresa()
+  ✔ Então a resposta tem status 204                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E a empresa não é mais encontrada                    # br.com.fiap.ecotrack.bdd.EmpresaSteps.aEmpresaNaoEMaisEncontrada()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.997.715/9365-24","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 25,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.997.715/9365-24",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        DELETE http://api:8080/api/empresas/25
+        => HTTP/1.1 204  (80 ms)
+        
+        GET http://api:8080/api/empresas/25
+        => HTTP/1.1 404  (3 ms)
+        {
+            "status": 404,
+            "mensagem": "Empresa não encontrada com ID: 25",
+            "dataHora": "2026-11-06T21:59:58.41425971"
+        }
+        
+
+
+@empresas @negativo @governanca
+Cenário: Recusar um CNPJ que já está cadastrado                              # classpath:features/empresas.feature:57
+  ✔ Dado que estou autenticado como ADMIN                                    # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada                                   # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu cadastro outra empresa com o mesmo CNPJ                        # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroOutraEmpresaComOMesmoCnpj()
+  ✔ Então a resposta tem status 400                                          # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Já existe uma empresa cadastrada com este CNPJ." # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.274.558/5063-98","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 26,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.274.558/5063-98",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/empresas
+        {"nome":"Outra Empresa LTDA","cnpj":"98.274.558/5063-98","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 400  (77 ms)
+        {
+            "status": 400,
+            "mensagem": "Já existe uma empresa cadastrada com este CNPJ.",
+            "dataHora": "2026-11-06T21:59:58.655959836"
+        }
+        
+
+
+@empresas @negativo @governanca
+Cenário: Impedir a exclusão de uma empresa que tem indicadores                                                  # classpath:features/empresas.feature:65
+  ✔ Dado que estou autenticado como ADMIN                                                                       # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Dado que existe uma empresa cadastrada                                                                      # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 4200 "kWh" de "ENERGIA"                                                           # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu excluo a empresa                                                                                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.euExcluoAEmpresa()
+  ✔ Então a resposta tem status 409                                                                             # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                                                           # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Operação viola integridade dos dados. Verifique se o registro possui dependências." # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.913.360/9916-98","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 27,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.913.360/9916-98",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":27,"tipo":"ENERGIA","valor":4200,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (86 ms)
+        {
+            "id": 9,
+            "empresaId": 27,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 4200,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        DELETE http://api:8080/api/empresas/27
+        => HTTP/1.1 409  (86 ms)
+        {
+            "status": 409,
+            "mensagem": "Operação viola integridade dos dados. Verifique se o registro possui dependências.",
+            "dataHora": "2026-11-06T21:59:59.008645919"
+        }
+        
+
+
+@empresas @negativo
+Cenário: Consultar uma empresa que não existe                      # classpath:features/empresas.feature:74
+  ✔ Dado que estou autenticado como ADMIN                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu consulto a empresa de id 999999                      # br.com.fiap.ecotrack.bdd.EmpresaSteps.euConsultoAEmpresaDeId(long)
+  ✔ Então a resposta tem status 404                                # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                              # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Empresa não encontrada com ID: 999999" # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        GET http://api:8080/api/empresas/999999
+        => HTTP/1.1 404  (76 ms)
+        {
+            "status": 404,
+            "mensagem": "Empresa não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T21:59:59.248667252"
+        }
+        
+
+
+@empresas @negativo
+Cenário: Consultar uma empresa com id que não é número             # classpath:features/empresas.feature:81
+  ✔ Dado que estou autenticado como ADMIN                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu consulto "/api/empresas/abc"                         # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 400                                # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                              # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Valor inválido para o parâmetro 'id'." # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        GET http://api:8080/api/empresas/abc
+        => HTTP/1.1 400  (78 ms)
+        {
+            "status": 400,
+            "mensagem": "Valor inválido para o parâmetro 'id'.",
+            "dataHora": "2026-11-06T21:59:59.334488294"
+        }
+        
+
+
+@empresas @negativo @inclusao
+Esquema do Cenário: Dizer qual campo do cadastro está errado                      # classpath:features/empresas.feature:96
+  ✔ Dado que estou autenticado como ADMIN                                         # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu cadastro uma empresa com "cnpj" igual a "12345678000190"            # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroUmaEmpresaCom(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 400                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erros-validacao"                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "cnpj" tem o erro "O CNPJ deve estar no formato XX.XXX.XXX/XXXX-XX" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Empresa com dado inválido","cnpj":"12345678000190","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 400  (76 ms)
+        [
+            {
+                "campo": "cnpj",
+                "mensagem": "O CNPJ deve estar no formato XX.XXX.XXX/XXXX-XX"
+            }
+        ]
+        
+
+
+@empresas @negativo @inclusao
+Esquema do Cenário: Dizer qual campo do cadastro está errado          # classpath:features/empresas.feature:97
+  ✔ Dado que estou autenticado como ADMIN                             # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu cadastro uma empresa com "estado" igual a "SPX"         # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroUmaEmpresaCom(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 400                                   # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erros-validacao"                      # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "estado" tem o erro "O estado deve conter 2 caracteres" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Empresa com dado inválido","cnpj":"98.665.163/4870-37","setor":"Reciclagem","cidade":"Santos","estado":"SPX"}
+        => HTTP/1.1 400  (74 ms)
+        [
+            {
+                "campo": "estado",
+                "mensagem": "O estado deve conter 2 caracteres"
+            }
+        ]
+        
+
+
+@empresas @negativo @inclusao
+Esquema do Cenário: Dizer qual campo do cadastro está errado # classpath:features/empresas.feature:98
+  ✔ Dado que estou autenticado como ADMIN                    # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ Quando eu cadastro uma empresa com "nome" igual a ""     # br.com.fiap.ecotrack.bdd.EmpresaSteps.euCadastroUmaEmpresaCom(java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 400                          # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erros-validacao"             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "nome" tem o erro "O nome é obrigatório"       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"","cnpj":"98.769.828/6100-12","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 400  (76 ms)
+        [
+            {
+                "campo": "nome",
+                "mensagem": "O nome é obrigatório"
+            }
+        ]
+        
+
+
+@indicadores @positivo
+Esquema do Cenário: Registrar o indicador do mês                      # classpath:features/indicadores.feature:23
+  ✔ Dado que estou autenticado como ADMIN                             # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                               # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro 1320,5 "m3" de "AGUA" referente a "2026-10-01" # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistro(java.math.BigDecimal,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 201                                   # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"                            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "tipo" vale "AGUA"                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "valor" vale 1320,5                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "empresaNome" vale o nome da empresa                    # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeONomeDaEmpresa(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.317.101/4613-69","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 28,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.317.101/4613-69",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":28,"tipo":"AGUA","valor":1320.5,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 10,
+            "empresaId": 28,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 1320.5,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Esquema do Cenário: Registrar o indicador do mês                        # classpath:features/indicadores.feature:24
+  ✔ Dado que estou autenticado como ADMIN                               # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                 # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro 7800 "kWh" de "ENERGIA" referente a "2026-10-01" # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistro(java.math.BigDecimal,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 201                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"                              # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "tipo" vale "ENERGIA"                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "valor" vale 7800                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "empresaNome" vale o nome da empresa                      # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeONomeDaEmpresa(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.055.619/4314-79","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 29,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.055.619/4314-79",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":29,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 11,
+            "empresaId": 29,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Esquema do Cenário: Registrar o indicador do mês                       # classpath:features/indicadores.feature:25
+  ✔ Dado que estou autenticado como ADMIN                              # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro 410 "kg" de "RESIDUOS" referente a "2026-10-01" # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistro(java.math.BigDecimal,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 201                                    # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"                             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "tipo" vale "RESIDUOS"                                   # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "valor" vale 410                                         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "empresaNome" vale o nome da empresa                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeONomeDaEmpresa(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.047.688/7586-51","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 30,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.047.688/7586-51",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":30,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 12,
+            "empresaId": 30,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Esquema do Cenário: Registrar o indicador do mês                               # classpath:features/indicadores.feature:26
+  ✔ Dado que estou autenticado como ADMIN                                      # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                        # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro 95,75 "tCO2e" de "EMISSAO_CO2" referente a "2026-10-01" # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistro(java.math.BigDecimal,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 201                                            # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"                                     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "tipo" vale "EMISSAO_CO2"                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "valor" vale 95,75                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "empresaNome" vale o nome da empresa                             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeONomeDaEmpresa(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.174.858/9522-95","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 31,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.174.858/9522-95",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":31,"tipo":"EMISSAO_CO2","valor":95.75,"unidadeMedida":"tCO2e","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (83 ms)
+        {
+            "id": 13,
+            "empresaId": 31,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "EMISSAO_CO2",
+            "valor": 95.75,
+            "unidadeMedida": "tCO2e",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Cenário: Consultar um indicador pelo id                  # classpath:features/indicadores.feature:29
+  ✔ Dado que estou autenticado como ADMIN                # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa registrou 7800 "kWh" de "ENERGIA" # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu consulto o indicador                       # br.com.fiap.ecotrack.bdd.IndicadorSteps.euConsultoOIndicador()
+  ✔ Então a resposta tem status 200                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "valor" vale 7800                          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "unidadeMedida" vale "kWh"                 # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.380.389/0171-07","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 32,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.380.389/0171-07",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":32,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (84 ms)
+        {
+            "id": 14,
+            "empresaId": 32,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        GET http://api:8080/api/indicadores/14
+        => HTTP/1.1 200  (76 ms)
+        {
+            "id": 14,
+            "empresaId": 32,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Cenário: Listar os indicadores de uma empresa          # classpath:features/indicadores.feature:38
+  ✔ Dado que estou autenticado como ADMIN              # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa registrou 1320,5 "m3" de "AGUA" # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"  # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu listo os indicadores da empresa          # br.com.fiap.ecotrack.bdd.IndicadorSteps.euListoOsIndicadoresDaEmpresa()
+  ✔ Então a resposta tem status 200                    # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-indicadores"     # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a lista tem 2 itens                              # br.com.fiap.ecotrack.bdd.RespostaSteps.aListaTemItens(int)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.997.333/3314-20","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (82 ms)
+        {
+            "id": 33,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.997.333/3314-20",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":33,"tipo":"AGUA","valor":1320.5,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 15,
+            "empresaId": 33,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 1320.5,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":33,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 16,
+            "empresaId": 33,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        GET http://api:8080/api/indicadores/empresa/33
+        => HTTP/1.1 200  (84 ms)
+        [
+            {
+                "id": 15,
+                "empresaId": 33,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "AGUA",
+                "valor": 1320.5,
+                "unidadeMedida": "m3",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            },
+            {
+                "id": 16,
+                "empresaId": 33,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "ENERGIA",
+                "valor": 7800,
+                "unidadeMedida": "kWh",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            }
+        ]
+        
+
+
+@indicadores @positivo
+Cenário: Filtrar os indicadores de resíduos             # classpath:features/indicadores.feature:47
+  ✔ Dado que estou autenticado como ADMIN               # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                 # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa registrou 410 "kg" de "RESIDUOS" # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu listo os indicadores do tipo "RESIDUOS"   # br.com.fiap.ecotrack.bdd.IndicadorSteps.euListoOsIndicadoresDoTipo(java.lang.String)
+  ✔ Então a resposta tem status 200                     # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "lista-indicadores"      # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E todos os itens têm "tipo" igual a "RESIDUOS"      # br.com.fiap.ecotrack.bdd.RespostaSteps.todosOsItensTem(java.lang.String,java.lang.String)
+  ✔ E o indicador registrado está na lista              # br.com.fiap.ecotrack.bdd.IndicadorSteps.oIndicadorRegistradoEstaNaLista()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.980.061/2413-34","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 34,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.980.061/2413-34",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":34,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 17,
+            "empresaId": 34,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        GET http://api:8080/api/indicadores?tipo=RESIDUOS
+        => HTTP/1.1 200  (80 ms)
+        [
+            {
+                "id": 17,
+                "empresaId": 34,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "RESIDUOS",
+                "valor": 410,
+                "unidadeMedida": "kg",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            },
+            {
+                "id": 3,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "RESIDUOS",
+                "valor": 350,
+                "unidadeMedida": "kg",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Geracao mensal de residuos"
+            }
+        ]
+        
+
+
+@indicadores @positivo
+Cenário: Corrigir um valor lançado errado                # classpath:features/indicadores.feature:56
+  ✔ Dado que estou autenticado como ADMIN                # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa registrou 7800 "kWh" de "ENERGIA" # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu corrijo o valor do indicador para 6950,4   # br.com.fiap.ecotrack.bdd.IndicadorSteps.euCorrijoOValorDoIndicador(java.math.BigDecimal)
+  ✔ Então a resposta tem status 200                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "indicador"               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "valor" vale 6950,4                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.519.577/9259-84","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 35,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.519.577/9259-84",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":35,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (76 ms)
+        {
+            "id": 18,
+            "empresaId": 35,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        PUT http://api:8080/api/indicadores/18
+        {"empresaId":35,"tipo":"ENERGIA","valor":6950.4,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 200  (78 ms)
+        {
+            "id": 18,
+            "empresaId": 35,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 6950.4,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+
+
+@indicadores @positivo
+Cenário: Excluir um indicador                          # classpath:features/indicadores.feature:64
+  ✔ Dado que estou autenticado como ADMIN              # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Dado que a empresa registrou 1320,5 "m3" de "AGUA" # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ Quando eu excluo o indicador                       # br.com.fiap.ecotrack.bdd.IndicadorSteps.euExcluoOIndicador()
+  ✔ Então a resposta tem status 204                    # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o indicador não é mais encontrado                # br.com.fiap.ecotrack.bdd.IndicadorSteps.oIndicadorNaoEMaisEncontrado()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.948.186/3119-42","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 36,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.948.186/3119-42",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":36,"tipo":"AGUA","valor":1320.5,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 19,
+            "empresaId": 36,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "AGUA",
+            "valor": 1320.5,
+            "unidadeMedida": "m3",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        DELETE http://api:8080/api/indicadores/19
+        => HTTP/1.1 204  (75 ms)
+        
+        GET http://api:8080/api/indicadores/19
+        => HTTP/1.1 404  (3 ms)
+        {
+            "status": 404,
+            "mensagem": "Indicador ESG não encontrado com ID: 19",
+            "dataHora": "2026-11-06T22:00:03.012768296"
+        }
+        
+
+
+@indicadores @negativo
+Cenário: Recusar valor negativo                                           # classpath:features/indicadores.feature:71
+  ✔ Dado que estou autenticado como ADMIN                                 # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                   # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro -10 "kWh" de "ENERGIA" referente a "2026-10-01"    # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistro(java.math.BigDecimal,java.lang.String,java.lang.String,java.lang.String)
+  ✔ Então a resposta tem status 400                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erros-validacao"                          # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "valor" tem o erro "O valor deve ser maior ou igual a zero" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoTemOErro(java.lang.String,java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.490.941/9031-01","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 37,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.490.941/9031-01",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":37,"tipo":"ENERGIA","valor":-10,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 400  (74 ms)
+        [
+            {
+                "campo": "valor",
+                "mensagem": "O valor deve ser maior ou igual a zero"
+            }
+        ]
+        
+
+
+@indicadores @negativo
+Cenário: Recusar indicador de uma empresa que não existe           # classpath:features/indicadores.feature:78
+  ✔ Dado que estou autenticado como ADMIN                          # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                            # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu registro um indicador para a empresa de id 999999    # br.com.fiap.ecotrack.bdd.IndicadorSteps.euRegistroUmIndicadorParaAEmpresaDeId(long)
+  ✔ Então a resposta tem status 404                                # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                              # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Empresa não encontrada com ID: 999999" # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.607.761/0930-68","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 38,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.607.761/0930-68",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":999999,"tipo":"AGUA","valor":100,"unidadeMedida":"m3","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 404  (77 ms)
+        {
+            "status": 404,
+            "mensagem": "Empresa não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T22:00:03.577231796"
+        }
+        
+
+
+@indicadores @negativo
+Cenário: Recusar um tipo de indicador desconhecido no filtro         # classpath:features/indicadores.feature:85
+  ✔ Dado que estou autenticado como ADMIN                            # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                              # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu listo os indicadores do tipo "PLASTICO"                # br.com.fiap.ecotrack.bdd.IndicadorSteps.euListoOsIndicadoresDoTipo(java.lang.String)
+  ✔ Então a resposta tem status 400                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Valor inválido para o parâmetro 'tipo'." # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.326.252/3423-89","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 39,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.326.252/3423-89",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/indicadores?tipo=PLASTICO
+        => HTTP/1.1 400  (74 ms)
+        {
+            "status": 400,
+            "mensagem": "Valor inválido para o parâmetro 'tipo'.",
+            "dataHora": "2026-11-06T22:00:03.817875296"
+        }
+        
+
+
+@indicadores @negativo
+Cenário: Consultar um indicador que não existe                           # classpath:features/indicadores.feature:92
+  ✔ Dado que estou autenticado como ADMIN                                # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                  # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ Quando eu consulto "/api/indicadores/999999"                         # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 404                                      # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                    # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Indicador ESG não encontrado com ID: 999999" # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.521.323/9661-54","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 40,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.521.323/9661-54",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        GET http://api:8080/api/indicadores/999999
+        => HTTP/1.1 404  (75 ms)
+        {
+            "status": 404,
+            "mensagem": "Indicador ESG não encontrado com ID: 999999",
+            "dataHora": "2026-11-06T22:00:04.06184213"
+        }
+        
+
+
+@monitoramento @governanca @positivo
+Cenário: API e banco no ar                     # classpath:features/monitoramento.feature:12
+  ✔ Dado que não estou autenticado             # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/actuator/health"      # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200            # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "health"        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "status" vale "UP"               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+  ✔ E o campo "components.db.status" vale "UP" # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        GET http://api:8080/actuator/health
+        => HTTP/1.1 200  (5 ms)
+        {
+            "status": "UP",
+            "components": {
+                "db": {
+                    "status": "UP"
+                },
+                "diskSpace": {
+                    "status": "UP"
+                },
+                "livenessState": {
+                    "status": "UP"
+                },
+                "ping": {
+                    "status": "UP"
+                },
+                "readinessState": {
+                    "status": "UP"
+                }
+            },
+            "groups": [
+                "liveness",
+                "readiness"
+            ]
+        }
+        
+
+
+@monitoramento @governanca @positivo
+Cenário: Versão e commit da imagem publicados # classpath:features/monitoramento.feature:20
+  ✔ Dado que não estou autenticado            # br.com.fiap.ecotrack.bdd.AcessoSteps.queNaoEstouAutenticado()
+  ✔ Quando eu consulto "/actuator/info"       # br.com.fiap.ecotrack.bdd.AcessoSteps.euConsulto(java.lang.String)
+  ✔ Então a resposta tem status 200           # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "info"         # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "app.nome" vale "EcoTrack API"  # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoVale(java.lang.String,java.lang.String)
+
+        GET http://api:8080/actuator/info
+        => HTTP/1.1 200  (6 ms)
+        {
+            "app": {
+                "nome": "EcoTrack API",
+                "descricao": "Gestao de indicadores e acoes ESG",
+                "versao": "1.1.0",
+                "ambiente": "testes",
+                "commit": "92e76ea5ffda0f5a00542f2721d994720389ec69"
+            },
+            "build": {
+                "artifact": "ecotrack-api",
+                "name": "EcoTrack API",
+                "time": "2026-10-14T01:02:48.994Z",
+                "version": "1.1.0",
+                "group": "br.com.fiap"
+            },
+            "java": {
+                "version": "21.0.12.1",
+                "vendor": {
+                    "name": "Eclipse Adoptium",
+                    "version": "Temurin-21.0.12.1+1"
+                },
+                "runtime": {
+                    "name": "OpenJDK Runtime Environment",
+                    "version": "21.0.12.1+1-LTS"
+                },
+                "jvm": {
+                    "name": "OpenJDK 64-Bit Server VM",
+                    "vendor": "Eclipse Adoptium",
+                    "version": "21.0.12.1+1-LTS"
+                }
+            }
+        }
+        
+
+
+@relatorios @positivo
+Cenário: Resumo de uma empresa                                                                      # classpath:features/relatorios.feature:17
+  ✔ Dado que estou autenticado como ADMIN                                                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"                                               # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 410 "kg" de "RESIDUOS"                                                # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "CONCLUIDA" e impacto de 300 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 700            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto o resumo da empresa                                                          # br.com.fiap.ecotrack.bdd.RelatorioSteps.euConsultoOResumoDaEmpresa()
+  ✔ Então a resposta tem status 200                                                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "resumo"                                                             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o resumo mostra:                                                                              # br.com.fiap.ecotrack.bdd.RelatorioSteps.oResumoMostra(java.util.Map)
+      | totalEmpresas        | 1    |
+      | totalIndicadores     | 2    |
+      | totalAcoes           | 2    |
+      | acoesConcluidas      | 1    |
+      | impactoTotalEstimado | 1000 |
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.411.056/5329-41","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 41,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.411.056/5329-41",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":41,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 20,
+            "empresaId": 41,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":41,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 21,
+            "empresaId": 41,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":41,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"CONCLUIDA","impactoEstimado":300,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 19,
+            "empresaId": 41,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":41,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":700,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 20,
+            "empresaId": 41,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 700,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/empresa/41
+        => HTTP/1.1 200  (78 ms)
+        {
+            "totalEmpresas": 1,
+            "totalIndicadores": 2,
+            "totalAcoes": 2,
+            "acoesConcluidas": 1,
+            "impactoTotalEstimado": 1000
+        }
+        
+
+
+@relatorios @positivo
+Cenário: Peso de uma ação no impacto da empresa                                                     # classpath:features/relatorios.feature:29
+  ✔ Dado que estou autenticado como ADMIN                                                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"                                               # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 410 "kg" de "RESIDUOS"                                                # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "CONCLUIDA" e impacto de 300 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 700            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto o impacto da ação de "EFICIENCIA_ENERGETICA"                                 # br.com.fiap.ecotrack.bdd.RelatorioSteps.euConsultoOImpactoDaAcaoDe(java.lang.String)
+  ✔ Então a resposta tem status 200                                                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "impacto"                                                            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E o campo "impactoEstimado" vale 300                                                            # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "impactoTotalEmpresa" vale 1000                                                       # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+  ✔ E o campo "percentualSobreTotal" vale 30                                                        # br.com.fiap.ecotrack.bdd.RespostaSteps.oCampoValeNumero(java.lang.String,java.math.BigDecimal)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.106.279/5639-65","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 42,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.106.279/5639-65",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":42,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (76 ms)
+        {
+            "id": 22,
+            "empresaId": 42,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":42,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 23,
+            "empresaId": 42,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":42,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"CONCLUIDA","impactoEstimado":300,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 21,
+            "empresaId": 42,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":42,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":700,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 22,
+            "empresaId": 42,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 700,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/impacto/21
+        => HTTP/1.1 200  (78 ms)
+        {
+            "acaoId": 21,
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "impactoTotalEmpresa": 1000,
+            "percentualSobreTotal": 30.00,
+            "empresaNome": "Verde Vale Reciclagem"
+        }
+        
+
+
+@relatorios @positivo @governanca
+Cenário: O resumo geral bate com os registros da API                                                # classpath:features/relatorios.feature:38
+  ✔ Dado que estou autenticado como ADMIN                                                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"                                               # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 410 "kg" de "RESIDUOS"                                                # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "CONCLUIDA" e impacto de 300 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 700            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto o resumo geral                                                               # br.com.fiap.ecotrack.bdd.RelatorioSteps.euConsultoOResumoGeral()
+  ✔ Então a resposta tem status 200                                                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "resumo"                                                             # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E os totais do resumo geral batem com as listagens de empresas, indicadores e ações             # br.com.fiap.ecotrack.bdd.RelatorioSteps.osTotaisBatemComAsListagens()
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.334.545/7430-39","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 43,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.334.545/7430-39",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":43,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 24,
+            "empresaId": 43,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":43,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 25,
+            "empresaId": 43,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":43,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"CONCLUIDA","impactoEstimado":300,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 23,
+            "empresaId": 43,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":43,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":700,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (79 ms)
+        {
+            "id": 24,
+            "empresaId": 43,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 700,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/resumo
+        => HTTP/1.1 200  (77 ms)
+        {
+            "totalEmpresas": 4,
+            "totalIndicadores": 6,
+            "totalAcoes": 5,
+            "acoesConcluidas": 1,
+            "impactoTotalEstimado": 3550
+        }
+        
+        GET http://api:8080/api/empresas
+        => HTTP/1.1 200  (4 ms)
+        [
+            {
+                "id": 43,
+                "nome": "Verde Vale Reciclagem",
+                "cnpj": "98.334.545/7430-39",
+                "setor": "Reciclagem",
+                "cidade": "Santos",
+                "estado": "SP",
+                "dataCadastro": "2026-11-06"
+            },
+            {
+                "id": 1,
+                "nome": "Verde Bebidas LTDA",
+                "cnpj": "12.345.678/0001-90",
+                "setor": "Bebidas",
+                "cidade": "Sao Paulo",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 2,
+                "nome": "Solar Tech S.A.",
+                "cnpj": "23.456.789/0001-12",
+                "setor": "Energia",
+                "cidade": "Campinas",
+                "estado": "SP",
+                "dataCadastro": "2026-11-07"
+            },
+            {
+                "id": 3,
+                "nome": "Empresa Teste Delete",
+                "cnpj": "11.222.333/0001-44",
+                "setor": "Servicos",
+                "cidade": "Rio de Janeiro",
+                "estado": "RJ",
+                "dataCadastro": "2026-11-07"
+            }
+        ]
+        
+        GET http://api:8080/api/indicadores
+        => HTTP/1.1 200  (4 ms)
+        [
+            {
+                "id": 25,
+                "empresaId": 43,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "RESIDUOS",
+                "valor": 410,
+                "unidadeMedida": "kg",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            },
+            {
+                "id": 24,
+                "empresaId": 43,
+                "empresaNome": "Verde Vale Reciclagem",
+                "tipo": "ENERGIA",
+                "valor": 7800,
+                "unidadeMedida": "kWh",
+                "dataReferencia": "2026-10-01",
+                "observacao": "Lançado pelos testes BDD"
+            },
+            {
+                "id": 1,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "AGUA",
+                "valor": 1500.5,
+                "unidadeMedida": "m3",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Consumo mensal de agua"
+            },
+            {
+                "id": 2,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "ENERGIA",
+                "valor": 8200,
+                "unidadeMedida": "kWh",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Consumo mensal de energia eletrica"
+            },
+            {
+                "id": 3,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "tipo": "RESIDUOS",
+                "valor": 350,
+                "unidadeMedida": "kg",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Geracao mensal de residuos"
+            },
+            {
+                "id": 4,
+                "empresaId": 2,
+                "empresaNome": "Solar Tech S.A.",
+                "tipo": "EMISSAO_CO2",
+                "valor": 1200,
+                "unidadeMedida": "tCO2e",
+                "dataReferencia": "2026-05-01",
+                "observacao": "Emissoes do trimestre"
+            }
+        ]
+        
+        GET http://api:8080/api/acoes-esg
+        => HTTP/1.1 200  (5 ms)
+        [
+            {
+                "id": 24,
+                "empresaId": 43,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Coleta seletiva no refeitório",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "RECICLAGEM",
+                "status": "PLANEJADA",
+                "impactoEstimado": 700,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            },
+            {
+                "id": 23,
+                "empresaId": 43,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Troca das lâmpadas do galpão por LED",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "EFICIENCIA_ENERGETICA",
+                "status": "CONCLUIDA",
+                "impactoEstimado": 300,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            },
+            {
+                "id": 1,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "titulo": "Troca de lampadas por LED",
+                "descricao": "Substituicao de lampadas antigas por modelos LED para reduzir consumo energetico.",
+                "categoria": "EFICIENCIA_ENERGETICA",
+                "status": "EM_ANDAMENTO",
+                "impactoEstimado": 1200,
+                "dataInicio": "2026-05-10",
+                "dataFimPrevista": "2026-06-10"
+            },
+            {
+                "id": 2,
+                "empresaId": 1,
+                "empresaNome": "Verde Bebidas LTDA",
+                "titulo": "Campanha de reciclagem interna",
+                "descricao": "Programa de conscientizacao e separacao correta de residuos reciclaveis.",
+                "categoria": "RECICLAGEM",
+                "status": "PLANEJADA",
+                "impactoEstimado": 500,
+                "dataInicio": "2026-06-01",
+                "dataFimPrevista": "2026-07-01"
+            },
+            {
+                "id": 3,
+                "empresaId": 2,
+                "empresaNome": "Solar Tech S.A.",
+                "titulo": "Compensacao via reflorestamento",
+                "descricao": "Plantio de 5000 mudas nativas em area degradada na Mata Atlantica.",
+                "categoria": "COMPENSACAO_CARBONO",
+                "status": "PLANEJADA",
+                "impactoEstimado": 850,
+                "dataInicio": "2026-07-01",
+                "dataFimPrevista": "2026-12-31"
+            }
+        ]
+        
+        GET http://api:8080/api/acoes-esg?status=CONCLUIDA
+        => HTTP/1.1 200  (5 ms)
+        [
+            {
+                "id": 23,
+                "empresaId": 43,
+                "empresaNome": "Verde Vale Reciclagem",
+                "titulo": "Troca das lâmpadas do galpão por LED",
+                "descricao": "Cadastrada pelos testes BDD",
+                "categoria": "EFICIENCIA_ENERGETICA",
+                "status": "CONCLUIDA",
+                "impactoEstimado": 300,
+                "dataInicio": "2026-11-16",
+                "dataFimPrevista": "2027-02-16"
+            }
+        ]
+        
+
+
+@relatorios @negativo
+Cenário: Resumo de uma empresa que não existe                                                       # classpath:features/relatorios.feature:45
+  ✔ Dado que estou autenticado como ADMIN                                                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"                                               # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 410 "kg" de "RESIDUOS"                                                # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "CONCLUIDA" e impacto de 300 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 700            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto o resumo da empresa de id 999999                                             # br.com.fiap.ecotrack.bdd.RelatorioSteps.euConsultoOResumoDaEmpresaDeId(long)
+  ✔ Então a resposta tem status 404                                                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Empresa não encontrada com ID: 999999"                                  # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.286.967/8544-31","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (80 ms)
+        {
+            "id": 44,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.286.967/8544-31",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":44,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 26,
+            "empresaId": 44,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":44,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 27,
+            "empresaId": 44,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":44,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"CONCLUIDA","impactoEstimado":300,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 25,
+            "empresaId": 44,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":44,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":700,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (76 ms)
+        {
+            "id": 26,
+            "empresaId": 44,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 700,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/empresa/999999
+        => HTTP/1.1 404  (75 ms)
+        {
+            "status": 404,
+            "mensagem": "Empresa não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T22:00:07.714030131"
+        }
+        
+
+
+@relatorios @negativo
+Cenário: Impacto de uma ação que não existe                                                         # classpath:features/relatorios.feature:52
+  ✔ Dado que estou autenticado como ADMIN                                                           # br.com.fiap.ecotrack.bdd.AcessoSteps.queEstouAutenticadoComo(java.lang.String)
+  ✔ E que existe uma empresa cadastrada                                                             # br.com.fiap.ecotrack.bdd.EmpresaSteps.queExisteUmaEmpresaCadastrada()
+  ✔ E que a empresa registrou 7800 "kWh" de "ENERGIA"                                               # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa registrou 410 "kg" de "RESIDUOS"                                                # br.com.fiap.ecotrack.bdd.IndicadorSteps.queAEmpresaRegistrou(java.math.BigDecimal,java.lang.String,java.lang.String)
+  ✔ E que a empresa tem uma ação de "EFICIENCIA_ENERGETICA" com status "CONCLUIDA" e impacto de 300 # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 700            # br.com.fiap.ecotrack.bdd.AcaoSteps.queAEmpresaTemUmaAcao(java.lang.String,java.lang.String,java.math.BigDecimal)
+  ✔ Quando eu consulto o impacto da ação de id 999999                                               # br.com.fiap.ecotrack.bdd.RelatorioSteps.euConsultoOImpactoDaAcaoDeId(long)
+  ✔ Então a resposta tem status 404                                                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aRespostaTemStatus(int)
+  ✔ E o corpo segue o contrato "erro"                                                               # br.com.fiap.ecotrack.bdd.RespostaSteps.oCorpoSegueOContrato(java.lang.String)
+  ✔ E a mensagem de erro é "Ação ESG não encontrada com ID: 999999"                                 # br.com.fiap.ecotrack.bdd.RespostaSteps.aMensagemDeErroE(java.lang.String)
+
+        POST http://api:8080/api/empresas
+        {"nome":"Verde Vale Reciclagem","cnpj":"98.572.612/9672-98","setor":"Reciclagem","cidade":"Santos","estado":"SP"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 45,
+            "nome": "Verde Vale Reciclagem",
+            "cnpj": "98.572.612/9672-98",
+            "setor": "Reciclagem",
+            "cidade": "Santos",
+            "estado": "SP",
+            "dataCadastro": "2026-11-06"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":45,"tipo":"ENERGIA","valor":7800,"unidadeMedida":"kWh","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (78 ms)
+        {
+            "id": 28,
+            "empresaId": 45,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "ENERGIA",
+            "valor": 7800,
+            "unidadeMedida": "kWh",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/indicadores
+        {"empresaId":45,"tipo":"RESIDUOS","valor":410,"unidadeMedida":"kg","dataReferencia":"2026-10-01","observacao":"Lançado pelos testes BDD"}
+        => HTTP/1.1 201  (81 ms)
+        {
+            "id": 29,
+            "empresaId": 45,
+            "empresaNome": "Verde Vale Reciclagem",
+            "tipo": "RESIDUOS",
+            "valor": 410,
+            "unidadeMedida": "kg",
+            "dataReferencia": "2026-10-01",
+            "observacao": "Lançado pelos testes BDD"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":45,"titulo":"Troca das lâmpadas do galpão por LED","descricao":"Cadastrada pelos testes BDD","categoria":"EFICIENCIA_ENERGETICA","status":"CONCLUIDA","impactoEstimado":300,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 27,
+            "empresaId": 45,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Troca das lâmpadas do galpão por LED",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "EFICIENCIA_ENERGETICA",
+            "status": "CONCLUIDA",
+            "impactoEstimado": 300,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        POST http://api:8080/api/acoes-esg
+        {"empresaId":45,"titulo":"Coleta seletiva no refeitório","descricao":"Cadastrada pelos testes BDD","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":700,"dataInicio":"2026-11-16","dataFimPrevista":"2027-02-16"}
+        => HTTP/1.1 201  (77 ms)
+        {
+            "id": 28,
+            "empresaId": 45,
+            "empresaNome": "Verde Vale Reciclagem",
+            "titulo": "Coleta seletiva no refeitório",
+            "descricao": "Cadastrada pelos testes BDD",
+            "categoria": "RECICLAGEM",
+            "status": "PLANEJADA",
+            "impactoEstimado": 700,
+            "dataInicio": "2026-11-16",
+            "dataFimPrevista": "2027-02-16"
+        }
+        
+        GET http://api:8080/api/relatorios/impacto/999999
+        => HTTP/1.1 404  (77 ms)
+        {
+            "status": 404,
+            "mensagem": "Ação ESG não encontrada com ID: 999999",
+            "dataHora": "2026-11-06T22:00:08.59164334"
+        }
+        
+
+
+56 scenarios (56 passed)
+436 steps (436 passed)
+0m 21.121s
+[INFO] Tests run: 56, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 21.38 s -- in br.com.fiap.ecotrack.bdd.ExecutarCenariosTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 56, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  23.129 s
+[INFO] Finished at: 2026-11-07T01:00:09Z
+[INFO] ------------------------------------------------------------------------
+ Container ecotrack-testes-testes-run-5bb6ec118107 Creating 
+ Container ecotrack-testes-testes-run-5bb6ec118107 Created 
+==> Relatório em testes/target/cucumber/relatorio.html
+exit=0

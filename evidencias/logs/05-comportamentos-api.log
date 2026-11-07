@@ -1,0 +1,26 @@
+$ # 1) ação com fim previsto antes do início (empresa 2, dos dados de exemplo)
+$ curl -s -u admin -H 'Content-Type: application/json' -X POST http://localhost:8080/api/acoes-esg -d '{... "dataInicio":"2026-12-01", "dataFimPrevista":"2026-01-01"}'
+{"id":34,"empresaId":2,"empresaNome":"Solar Tech S.A.","titulo":"Teste de datas","descricao":"Fim antes do inicio","categoria":"RECICLAGEM","status":"CONCLUIDA","impactoEstimado":1,"dataInicio":"2026-12-01","dataFimPrevista":"2026-01-01"}
+HTTP 201
+
+$ # 2) a mesma ação, que está CONCLUIDA, volta para PLANEJADA
+$ curl -s -u admin -H 'Content-Type: application/json' -X PATCH http://localhost:8080/api/acoes-esg/34/status -d '{"status":"PLANEJADA"}'
+{"id":34,"empresaId":2,"empresaNome":"Solar Tech S.A.","titulo":"Teste de datas","descricao":"Fim antes do inicio","categoria":"RECICLAGEM","status":"PLANEJADA","impactoEstimado":1,"dataInicio":"2026-12-01","dataFimPrevista":"2026-01-01"}
+HTTP 200
+$ curl -s -u admin -X DELETE http://localhost:8080/api/acoes-esg/34   # limpa o teste
+HTTP 204
+
+$ # 3) formatos de erro
+$ curl -s http://localhost:8080/api/empresas/999999
+{"status":404,"mensagem":"Empresa não encontrada com ID: 999999","dataHora":"2026-11-06T22:00:20.074236721"}
+HTTP 404
+$ curl -s -u admin -H 'Content-Type: application/json' -X POST http://localhost:8080/api/empresas -d '{}'
+[{"campo":"setor","mensagem":"O setor é obrigatório"},{"campo":"nome","mensagem":"O nome é obrigatório"},{"campo":"cnpj","mensagem":"O CNPJ é obrigatório"},{"campo":"cidade","mensagem":"A cidade é obrigatória"},{"campo":"estado","mensagem":"O estado é obrigatório"}]
+HTTP 400
+$ curl -s -u user -H 'Content-Type: application/json' -X POST http://localhost:8080/api/empresas -d '{}'
+{"timestamp":"2026-11-07T01:00:20.247+00:00","status":403,"error":"Forbidden","path":"/api/empresas"}
+HTTP 403
+$ curl -s -i -H 'Content-Type: application/json' -X POST http://localhost:8080/api/empresas -d '{}'   # sem login
+HTTP/1.1 401 
+WWW-Authenticate: Basic realm="Realm"
+Content-Length: 0
