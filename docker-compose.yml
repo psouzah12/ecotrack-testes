@@ -1,0 +1,61 @@
+# Ambiente dos testes BDD: Oracle, API EcoTrack e o container que roda os cenários.
+#
+#   docker compose up -d --wait oracle api   sobe só o banco e a API (porta 8080)
+#   docker compose run --rm testes           roda os cenários contra a API
+#   docker compose down -v                   derruba tudo e apaga o banco
+#
+# A API vem da imagem que o pipeline do projeto ecotrack-devops publicou no GHCR.
+# Para testar outra versão: ECOTRACK_IMAGE=ecotrack-api:local docker compose ...
+name: ecotrack-testes
+
+services:
+  oracle:
+    image: gvenzl/oracle-free:23-slim
+    environment:
+      ORACLE_PASSWORD: ${ORACLE_ADMIN_PASSWORD:-oracle123}
+      APP_USER: ECOTRACK
+      APP_USER_PASSWORD: ${DB_PASSWORD:-ecotrack123}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  api:
+    image: ${ECOTRACK_IMAGE:-ghcr.io/psouzah12/ecotrack-api:1.1.0}
+    depends_on:
+      oracle:
+        condition: service_healthy
+    environment:
+      APP_ENV: testes
+      SPRING_DATASOURCE_URL: jdbc:oracle:thin:@oracle:1521/FREEPDB1
+      SPRING_DATASOURCE_USERNAME: ECOTRACK
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-ecotrack123}
+      ECOTRACK_ADMIN_USER: ${ECOTRACK_ADMIN_USER:-admin@ecotrack.com}
+      ECOTRACK_ADMIN_PASSWORD: ${ECOTRACK_ADMIN_PASSWORD:-admin123}
+      ECOTRACK_USER: ${ECOTRACK_USER:-user@ecotrack.com}
+      ECOTRACK_USER_PASSWORD: ${ECOTRACK_USER_PASSWORD:-user123}
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    # o healthcheck vem da imagem (GET /actuator/health/readiness, que inclui o banco)
+
+  testes:
+    build: ./testes
+    profiles: ["testes"]
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      ECOTRACK_BASE_URL: http://api:8080
+      ECOTRACK_ADMIN_USER: ${ECOTRACK_ADMIN_USER:-admin@ecotrack.com}
+      ECOTRACK_ADMIN_PASSWORD: ${ECOTRACK_ADMIN_PASSWORD:-admin123}
+      ECOTRACK_USER: ${ECOTRACK_USER:-user@ecotrack.com}
+      ECOTRACK_USER_PASSWORD: ${ECOTRACK_USER_PASSWORD:-user123}
+    volumes:
+      # relatórios do Cucumber e do Surefire ficam na máquina em testes/target
+      - ./testes/target:/testes/target
+      - maven-repo:/root/.m2
+
+volumes:
+  maven-repo:
