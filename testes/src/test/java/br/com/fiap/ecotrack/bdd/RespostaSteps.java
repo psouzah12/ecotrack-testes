@@ -39,7 +39,9 @@ public class RespostaSteps {
 
     @Então("o campo {string} vale {bigdecimal}")
     public void oCampoValeNumero(String campo, BigDecimal valor) {
-        assertThat(Dados.decimal(cenario.resposta().path(campo))).as(campo).isEqualByComparingTo(valor);
+        Object atual = cenario.resposta().path(campo);
+        assertThat(atual).as(campo).isNotNull();
+        assertThat(Dados.decimal(atual)).as(campo).isEqualByComparingTo(valor);
     }
 
     @Então("o campo {string} vale o nome da empresa")

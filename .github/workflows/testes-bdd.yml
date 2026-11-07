@@ -14,7 +14,7 @@ on:
   workflow_dispatch:
     inputs:
       tags:
-        description: "Filtro de tags do Cucumber (ex: @negativo). Vazio roda tudo."
+        description: "Filtro de tags do Cucumber (ex.: @negativo). Se ficar vazio, roda todos os cenários."
         required: false
         default: ""
 

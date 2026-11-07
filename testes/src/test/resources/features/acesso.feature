@@ -7,7 +7,10 @@ Funcionalidade: Acesso por perfil
 
   @positivo @eficiencia
   Esquema do Cenário: Consultar dados públicos sem login
-    Dado que não estou autenticado
+    Dado que existe uma empresa cadastrada
+    E que a empresa registrou 100 "m3" de "AGUA"
+    E que a empresa tem uma ação de "RECICLAGEM" com status "PLANEJADA" e impacto de 350
+    E que não estou autenticado
     Quando eu consulto "<endereço>"
     Então a resposta tem status 200
     E o corpo segue o contrato "<contrato>"

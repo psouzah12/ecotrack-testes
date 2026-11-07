@@ -1,10 +1,12 @@
 # Ambiente dos testes BDD: Oracle, API EcoTrack e o container que roda os cenários.
 #
 #   docker compose up -d --wait oracle api   sobe só o banco e a API (porta 8080)
-#   docker compose run --rm testes           roda os cenários contra a API
+#   docker compose run --rm --build testes   roda os cenários contra a API
 #   docker compose down -v                   derruba tudo e apaga o banco
 #
 # A API vem da imagem que o pipeline do projeto ecotrack-devops publicou no GHCR.
+# A tag sha-92e76ea é fixa (a 1.1.0 é regravada a cada build da main), então
+# os testes sempre rodam contra o mesmo build.
 # Para testar outra versão: ECOTRACK_IMAGE=ecotrack-api:local docker compose ...
 name: ecotrack-testes
 
@@ -23,7 +25,7 @@ services:
       start_period: 60s
 
   api:
-    image: ${ECOTRACK_IMAGE:-ghcr.io/psouzah12/ecotrack-api:1.1.0}
+    image: ${ECOTRACK_IMAGE:-ghcr.io/psouzah12/ecotrack-api:sha-92e76ea}
     depends_on:
       oracle:
         condition: service_healthy

@@ -73,6 +73,6 @@ public class IndicadorSteps {
 
     @Então("o indicador não é mais encontrado")
     public void oIndicadorNaoEMaisEncontrado() {
-        assertThat(cenario.ler(INDICADORES + "/" + cenario.indicador.id()).statusCode()).isEqualTo(404);
+        cenario.conferirQueNaoExiste(INDICADORES + "/" + cenario.indicador.id());
     }
 }

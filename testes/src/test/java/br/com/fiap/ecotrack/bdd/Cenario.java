@@ -1,9 +1,12 @@
 package br.com.fiap.ecotrack.bdd;
 
 import io.restassured.RestAssured;
+import io.restassured.config.JsonConfig;
+import io.restassured.config.RestAssuredConfig;
 import io.restassured.filter.FilterContext;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import io.restassured.path.json.config.JsonPathConfig;
 import io.restassured.response.Response;
 import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
@@ -19,6 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 // Estado de um cenário. O Cucumber cria um Cenario novo para cada cenário e o
 // PicoContainer passa o mesmo objeto para todas as classes de steps.
 public class Cenario {
+
+    // sem isso o JsonPath lê decimais como Float e 1234567.89 vira 1234567.9
+    private static final RestAssuredConfig CONFIG = RestAssuredConfig.config()
+            .jsonConfig(JsonConfig.jsonConfig().numberReturnType(JsonPathConfig.NumberReturnType.BIG_DECIMAL));
 
     record Registro(long id, Map<String, Object> dados) {
     }
@@ -64,6 +71,13 @@ public class Cenario {
         return requisicao(null).get(caminho);
     }
 
+    // depois de uma exclusão: a consulta tem de voltar 404 com o corpo de erro da API
+    void conferirQueNaoExiste(String caminho) {
+        Response consulta = ler(caminho);
+        assertThat(consulta.statusCode()).as("GET %s depois da exclusão", caminho).isEqualTo(404);
+        assertThat(Contrato.violacoes("erro", consulta.asString())).as("violações do contrato erro.json").isEmpty();
+    }
+
     // cadastro de apoio para o "Dado", sempre com o ADMIN
     Registro criar(String caminho, Map<String, Object> dados) {
         Response criado = requisicao(Api.ADMIN).body(dados).post(caminho);
@@ -90,6 +104,7 @@ public class Cenario {
 
     private RequestSpecification requisicao(Api.Credencial credencial) {
         RequestSpecification requisicao = RestAssured.given()
+                .config(CONFIG)
                 .baseUri(Api.URL)
                 .contentType(ContentType.JSON)
                 .accept(ContentType.JSON)

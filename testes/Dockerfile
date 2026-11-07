@@ -1,6 +1,7 @@
 # Container que roda os cenários BDD contra a API (usado pelo docker-compose.yml).
 # Os argumentos depois do nome do serviço vão para o Maven:
-#   docker compose run --rm testes -Dcucumber.filter.tags=@negativo
+#   docker compose run --rm --build testes -Dcucumber.filter.tags=@negativo
+# O --build refaz a imagem quando um .feature, .java ou schema muda.
 FROM maven:3.9.9-eclipse-temurin-21
 
 WORKDIR /testes

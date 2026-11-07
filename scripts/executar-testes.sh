@@ -11,6 +11,15 @@
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
+# derruba o ambiente também quando a subida falha ou a execução é interrompida
+derrubar() {
+  if [ "${MANTER_AMBIENTE:-0}" != 1 ]; then
+    echo "==> Derrubando o ambiente"
+    docker compose down -v
+  fi
+}
+trap derrubar EXIT
+
 echo "==> Subindo Oracle e API (na primeira vez leva uns 2 minutos)"
 docker compose up -d --wait oracle api
 docker compose ps --format 'table {{.Service}}\t{{.Image}}\t{{.Status}}'
@@ -20,9 +29,8 @@ echo "==> Rodando os cenários"
 status=0
 docker compose run --rm --build testes "$@" || status=$?
 
+# o container roda como root: devolve testes/target para o usuário da máquina (importa no Linux)
+docker compose run --rm --no-deps --entrypoint chown testes -R "$(id -u):$(id -g)" /testes/target
+
 echo "==> Relatório em testes/target/cucumber/relatorio.html"
-if [ "${MANTER_AMBIENTE:-0}" != 1 ]; then
-  echo "==> Derrubando o ambiente"
-  docker compose down -v
-fi
 exit "$status"

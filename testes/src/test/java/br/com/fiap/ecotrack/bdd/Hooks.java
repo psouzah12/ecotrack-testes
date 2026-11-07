@@ -16,24 +16,27 @@ public class Hooks {
         this.cenario = cenario;
     }
 
-    // no CI e no docker compose a API pode ainda estar subindo (o Oracle leva 1 a 2 minutos)
+    // O script e o workflow já esperam a API ficar healthy (docker compose up --wait).
+    // Esta espera cobre quem roda mvn test logo depois de subir o ambiente sem o --wait.
     @BeforeAll
     public static void esperarApi() throws InterruptedException {
-        Instant limite = Instant.now().plus(Duration.ofMinutes(3));
-        while (!apiPronta()) {
-            if (Instant.now().isAfter(limite)) {
-                throw new IllegalStateException("a API não ficou pronta em " + Api.URL + "/actuator/health/readiness");
+        Instant limite = Instant.now().plus(Duration.ofMinutes(2));
+        String ultimoResultado = "";
+        while (Instant.now().isBefore(limite)) {
+            try {
+                int status = RestAssured.get(Api.URL + "/actuator/health/readiness").statusCode();
+                if (status == 200) {
+                    return;
+                }
+                ultimoResultado = "HTTP " + status;
+            } catch (Exception e) {
+                // enquanto o container sobe a conexão é recusada; a causa vai na mensagem final
+                ultimoResultado = e.toString();
             }
             Thread.sleep(3000);
         }
-    }
-
-    private static boolean apiPronta() {
-        try {
-            return RestAssured.get(Api.URL + "/actuator/health/readiness").statusCode() == 200;
-        } catch (Exception conexaoRecusada) {
-            return false;
-        }
+        throw new IllegalStateException("a API não ficou pronta em " + Api.URL
+                + "/actuator/health/readiness (último resultado: " + ultimoResultado + ")");
     }
 
     @After

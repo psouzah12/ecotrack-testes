@@ -30,6 +30,14 @@ Funcionalidade: Cadastro de empresas
     E o corpo traz os dados da empresa cadastrada
 
   @positivo
+  Cenário: Listar as empresas
+    Dado que existe uma empresa cadastrada
+    Quando eu consulto "/api/empresas"
+    Então a resposta tem status 200
+    E o corpo segue o contrato "lista-empresas"
+    E a empresa cadastrada está na lista
+
+  @positivo
   Cenário: Mudar o setor e a cidade de uma empresa
     Dado que existe uma empresa cadastrada
     Quando eu altero a empresa para o setor "Energia solar" e a cidade "Campinas"

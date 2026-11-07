@@ -87,7 +87,7 @@ public class AcaoSteps {
 
     @Então("a ação não é mais encontrada")
     public void aAcaoNaoEMaisEncontrada() {
-        assertThat(cenario.ler(ACOES + "/" + cenario.acao.id()).statusCode()).isEqualTo(404);
+        cenario.conferirQueNaoExiste(ACOES + "/" + cenario.acao.id());
     }
 
     private void mudarStatus(long id, String status) {

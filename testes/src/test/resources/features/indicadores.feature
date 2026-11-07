@@ -87,3 +87,10 @@ Funcionalidade: Indicadores ambientais
     Então a resposta tem status 400
     E o corpo segue o contrato "erro"
     E a mensagem de erro é "Valor inválido para o parâmetro 'tipo'."
+
+  @negativo
+  Cenário: Consultar um indicador que não existe
+    Quando eu consulto "/api/indicadores/999999"
+    Então a resposta tem status 404
+    E o corpo segue o contrato "erro"
+    E a mensagem de erro é "Indicador ESG não encontrado com ID: 999999"

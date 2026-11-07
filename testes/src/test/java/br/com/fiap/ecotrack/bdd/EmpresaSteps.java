@@ -84,8 +84,13 @@ public class EmpresaSteps {
         assertThat(cenario.ler(EMPRESAS).jsonPath().getList("id", Long.class)).contains(id);
     }
 
+    @Então("a empresa cadastrada está na lista")
+    public void aEmpresaCadastradaEstaNaLista() {
+        assertThat(cenario.resposta().jsonPath().getList("id", Long.class)).contains(cenario.empresa.id());
+    }
+
     @Então("a empresa não é mais encontrada")
     public void aEmpresaNaoEMaisEncontrada() {
-        assertThat(cenario.ler(EMPRESAS + "/" + cenario.empresa.id()).statusCode()).isEqualTo(404);
+        cenario.conferirQueNaoExiste(EMPRESAS + "/" + cenario.empresa.id());
     }
 }

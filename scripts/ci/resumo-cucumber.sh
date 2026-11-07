@@ -11,6 +11,14 @@ if [ ! -f "$JSON" ]; then
   exit 0
 fi
 
+total=$(jq '[.[].elements[] | select(.type == "scenario")] | length' "$JSON")
+if [ "$total" -eq 0 ]; then
+  echo "### Cenários BDD"
+  echo
+  echo "Nenhum cenário foi executado (filtro de tags sem correspondência?)."
+  exit 1
+fi
+
 echo "### Cenários BDD"
 echo
 echo "| Funcionalidade | Cenários | Passaram | Falharam |"

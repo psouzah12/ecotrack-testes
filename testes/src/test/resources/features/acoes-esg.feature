@@ -106,3 +106,10 @@ Funcionalidade: Ações ESG
     Então a resposta tem status 404
     E o corpo segue o contrato "erro"
     E a mensagem de erro é "Ação ESG não encontrada com ID: 999999"
+
+  @negativo
+  Cenário: Consultar uma ação que não existe
+    Quando eu consulto "/api/acoes-esg/999999"
+    Então a resposta tem status 404
+    E o corpo segue o contrato "erro"
+    E a mensagem de erro é "Ação ESG não encontrada com ID: 999999"
