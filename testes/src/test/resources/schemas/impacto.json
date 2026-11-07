@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Impacto de uma ação sobre o total da empresa",
+  "type": "object",
+  "required": ["acaoId", "titulo", "categoria", "status", "impactoEstimado", "impactoTotalEmpresa", "percentualSobreTotal", "empresaNome"],
+  "additionalProperties": false,
+  "properties": {
+    "acaoId": { "$ref": "comum.json#/$defs/id" },
+    "titulo": { "$ref": "comum.json#/$defs/texto" },
+    "categoria": { "$ref": "comum.json#/$defs/categoriaAcao" },
+    "status": { "$ref": "comum.json#/$defs/statusAcao" },
+    "impactoEstimado": { "$ref": "comum.json#/$defs/quantia" },
+    "impactoTotalEmpresa": { "$ref": "comum.json#/$defs/quantia" },
+    "percentualSobreTotal": { "type": "number", "minimum": 0, "maximum": 100 },
+    "empresaNome": { "$ref": "comum.json#/$defs/texto" }
+  }
+}

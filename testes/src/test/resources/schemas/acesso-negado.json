@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resposta padrão do Spring para 403",
+  "type": "object",
+  "required": ["timestamp", "status", "error", "path"],
+  "properties": {
+    "timestamp": { "type": "string" },
+    "status": { "const": 403 },
+    "error": { "const": "Forbidden" },
+    "path": { "type": "string", "pattern": "^/api/" }
+  }
+}

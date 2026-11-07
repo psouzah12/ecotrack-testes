@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Info do Actuator: o que está rodando",
+  "type": "object",
+  "required": ["app", "build"],
+  "properties": {
+    "app": {
+      "type": "object",
+      "required": ["nome", "versao", "ambiente", "commit"],
+      "properties": {
+        "nome": { "const": "EcoTrack API" },
+        "descricao": { "type": "string" },
+        "versao": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+" },
+        "ambiente": { "$ref": "comum.json#/$defs/texto" },
+        "commit": { "type": "string", "pattern": "^([0-9a-f]{7,40}|local)$" }
+      }
+    },
+    "build": {
+      "type": "object",
+      "required": ["artifact", "version", "time"],
+      "properties": {
+        "artifact": { "const": "ecotrack-api" },
+        "version": { "type": "string" },
+        "time": { "type": "string" }
+      }
+    }
+  }
+}

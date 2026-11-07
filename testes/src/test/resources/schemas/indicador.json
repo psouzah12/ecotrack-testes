@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Indicador ambiental",
+  "type": "object",
+  "required": ["id", "empresaId", "empresaNome", "tipo", "valor", "unidadeMedida", "dataReferencia", "observacao"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "comum.json#/$defs/id" },
+    "empresaId": { "$ref": "comum.json#/$defs/id" },
+    "empresaNome": { "$ref": "comum.json#/$defs/texto" },
+    "tipo": { "$ref": "comum.json#/$defs/tipoIndicador" },
+    "valor": { "$ref": "comum.json#/$defs/quantia" },
+    "unidadeMedida": { "$ref": "comum.json#/$defs/texto", "maxLength": 30 },
+    "dataReferencia": { "$ref": "comum.json#/$defs/data" },
+    "observacao": { "type": ["string", "null"], "maxLength": 255 }
+  }
+}

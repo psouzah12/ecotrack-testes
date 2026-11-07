@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Empresa",
+  "type": "object",
+  "required": ["id", "nome", "cnpj", "setor", "cidade", "estado", "dataCadastro"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "comum.json#/$defs/id" },
+    "nome": { "$ref": "comum.json#/$defs/texto", "maxLength": 150 },
+    "cnpj": { "type": "string", "pattern": "^\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}$" },
+    "setor": { "$ref": "comum.json#/$defs/texto", "maxLength": 100 },
+    "cidade": { "$ref": "comum.json#/$defs/texto", "maxLength": 100 },
+    "estado": { "type": "string", "pattern": "^[A-Z]{2}$" },
+    "dataCadastro": { "$ref": "comum.json#/$defs/data" }
+  }
+}

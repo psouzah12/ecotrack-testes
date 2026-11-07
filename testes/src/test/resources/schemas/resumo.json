@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Resumo ESG (geral ou de uma empresa)",
+  "type": "object",
+  "required": ["totalEmpresas", "totalIndicadores", "totalAcoes", "acoesConcluidas", "impactoTotalEstimado"],
+  "additionalProperties": false,
+  "properties": {
+    "totalEmpresas": { "type": "integer", "minimum": 0 },
+    "totalIndicadores": { "type": "integer", "minimum": 0 },
+    "totalAcoes": { "type": "integer", "minimum": 0 },
+    "acoesConcluidas": { "type": "integer", "minimum": 0 },
+    "impactoTotalEstimado": { "$ref": "comum.json#/$defs/quantia" }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Ação ESG",
+  "type": "object",
+  "required": ["id", "empresaId", "empresaNome", "titulo", "descricao", "categoria", "status", "impactoEstimado", "dataInicio", "dataFimPrevista"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "$ref": "comum.json#/$defs/id" },
+    "empresaId": { "$ref": "comum.json#/$defs/id" },
+    "empresaNome": { "$ref": "comum.json#/$defs/texto" },
+    "titulo": { "$ref": "comum.json#/$defs/texto", "maxLength": 150 },
+    "descricao": { "$ref": "comum.json#/$defs/texto", "maxLength": 500 },
+    "categoria": { "$ref": "comum.json#/$defs/categoriaAcao" },
+    "status": { "$ref": "comum.json#/$defs/statusAcao" },
+    "impactoEstimado": { "type": ["number", "null"], "minimum": 0 },
+    "dataInicio": { "$ref": "comum.json#/$defs/data" },
+    "dataFimPrevista": {
+      "anyOf": [{ "$ref": "comum.json#/$defs/data" }, { "type": "null" }]
+    }
+  }
+}

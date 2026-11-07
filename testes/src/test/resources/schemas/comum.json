@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Tipos usados por mais de um contrato",
+  "$defs": {
+    "id": { "type": "integer", "minimum": 1 },
+    "data": { "type": "string", "format": "date", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "quantia": { "type": "number", "minimum": 0 },
+    "texto": { "type": "string", "minLength": 1 },
+    "tipoIndicador": { "enum": ["AGUA", "ENERGIA", "RESIDUOS", "EMISSAO_CO2"] },
+    "categoriaAcao": { "enum": ["REDUCAO_CONSUMO", "RECICLAGEM", "COMPENSACAO_CARBONO", "EFICIENCIA_ENERGETICA", "EDUCACAO_AMBIENTAL"] },
+    "statusAcao": { "enum": ["PLANEJADA", "EM_ANDAMENTO", "CONCLUIDA", "CANCELADA"] }
+  }
+}

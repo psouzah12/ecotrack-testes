@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Health do Actuator",
+  "type": "object",
+  "required": ["status", "components"],
+  "properties": {
+    "status": { "$ref": "#/$defs/estado" },
+    "components": {
+      "type": "object",
+      "required": ["db", "livenessState", "readinessState"],
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status"],
+        "properties": { "status": { "$ref": "#/$defs/estado" } }
+      }
+    },
+    "groups": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "estado": { "enum": ["UP", "DOWN", "OUT_OF_SERVICE", "UNKNOWN"] }
+  }
+}
